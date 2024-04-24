@@ -1,1 +1,1 @@
-web: java -jar target/santiagolp-proyfin-3.4.0-SNAPSHOT.war
+web: java -jar target/ddivertidaback-0.0.1-SNAPSHOT.war
