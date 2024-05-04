@@ -30,10 +30,10 @@ public class User {
 	@Column(length = 20)
 	private String movil;
 
-	@Column(length = 15)
+	@Column(length = 50)
 	private String password;
 
-	@Column(name = "postal_code", length = 10)
+	@Column(name = "postal_code", length = 50)
 	private String postalCode;
 
 	@Column

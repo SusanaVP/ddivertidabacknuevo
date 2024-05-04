@@ -24,7 +24,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@PostMapping("/saveuser")
+	@PostMapping("/saveUser")
 	public ResponseEntity<String> saveUser(@RequestBody User user) {
 		User savedUser = this.userService.saveUser(user);
 		if (savedUser != null) {
