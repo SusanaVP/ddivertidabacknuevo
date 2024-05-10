@@ -21,7 +21,15 @@ public class BlogService {
 		blogRepository.likesPlus(idBlog);
 	}
 
-	public void addBlog(String title, String description, int heart, Long idPerson, String image) {
-		blogRepository.saveBlog(title, description, heart, idPerson, image);
+	public void addBlog(String title, String description, int heart, Long idUser, String image, boolean validated) {
+		blogRepository.saveBlog(title, description, heart, idUser, image, validated);
+	}
+
+	public List<Blog> getAllBlogsValidated() {
+		return blogRepository.getAllBlogsValidated();
+	}
+
+	public List<Blog> getAllBlogsNoValidated() {
+		return blogRepository.getAllBlogsNoValidated();
 	}
 }

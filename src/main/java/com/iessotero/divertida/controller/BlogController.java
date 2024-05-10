@@ -27,7 +27,17 @@ public class BlogController {
 	public List<Blog> getBlog() {
 		return blogService.getAllBlogs();
 	}
+	
+	@GetMapping("/blogValidated")
+	public List<Blog> getBlogValidated() {
+		return blogService.getAllBlogsValidated();
+	}
 
+	@GetMapping("/blogNoValidated")
+	public List<Blog> getBlogNoValidated() {
+		return blogService.getAllBlogsNoValidated();
+	}
+	
 	@GetMapping("/likesBlog/{idBlog}")
 	public ResponseEntity<String> likesPlus(@PathVariable Long idBlog) {
 		try {
@@ -43,7 +53,7 @@ public class BlogController {
 		try {
 			Long idUser = blogEntryData.getUser().getId();
 			this.blogService.addBlog(blogEntryData.getTitle(), blogEntryData.getDescription(), blogEntryData.getLikes(),
-					idUser, blogEntryData.getImage());
+					idUser, blogEntryData.getImage(), blogEntryData.getValidated());
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

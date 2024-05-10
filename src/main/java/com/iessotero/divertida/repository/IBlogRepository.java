@@ -25,8 +25,14 @@ public interface IBlogRepository extends JpaRepository<Blog, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "INSERT INTO Blog (title, description, likes, user_id, image) "
-			+ "VALUES (:title, :description, :likes, :idUser, :image)", nativeQuery = true)
+	@Query(value = "INSERT INTO Blog (title, description, likes, user_id, image, validated) "
+			+ "VALUES (:title, :description, :likes, :idUser, :image, :validated)", nativeQuery = true)	
 	void saveBlog(@Param("title") String title, @Param("description") String description, @Param("likes") int likes,
-			@Param("idUser") Long idUser, @Param("image") String image);
+		@Param("idUser") Long idUser, @Param("image") String image, @Param("validated") boolean validated);
+
+	@Query("SELECT b FROM Blog b WHERE b.validated = true")
+	List<Blog> getAllBlogsValidated();
+
+	@Query("SELECT b FROM Blog b WHERE b.validated = false")
+	List<Blog> getAllBlogsNoValidated();
 }

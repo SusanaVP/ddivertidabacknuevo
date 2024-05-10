@@ -50,7 +50,7 @@ public class UserController {
 		return this.userService.existsEmailPaswword(request.getEmail(), request.getPassword());
 	}
 
-	@GetMapping("/getuser/{id}")
+	@GetMapping("/getUser/{id}")
 	public ResponseEntity<User> finduserById(@PathVariable Long id) {
 		Optional<User> userOptional = this.userService.findUserById(id);
 
