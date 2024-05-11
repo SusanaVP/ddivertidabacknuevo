@@ -13,23 +13,6 @@ public class VideoService {
 	@Autowired
 	private IVideoRepository videoRepository;
 
-//	public List<Videos> findFavoritesVideos(Long idUser) {
-//		return (List<Videos>) videoRepository.findFavoritesVideos(idUser);
-//	}
-
-	public void addFavoriteVideo(Long idVideo, Long idUser) {
-		int result = videoRepository.existsFavoriteVideo(idVideo, idUser);
-		if (result == 1) {
-			videoRepository.updateFavoriteVideo(idVideo, idUser);
-		} else {
-			videoRepository.addFavoriteVideo(idVideo, idUser);
-		}
-	}
-
-	public void deleteFavoriteVideos(Long idVideo, Long idUser) {
-		videoRepository.deleteFavoriteVideo(idVideo, idUser);
-	}
-
 	public List<Videos> getAllVideos() {
 		return videoRepository.findAll();
 	}
@@ -41,5 +24,5 @@ public class VideoService {
 	public List<Videos> findVideosByCategory(String category) {
 		return videoRepository.findVideosByCategory(category);
 	}
-	
+
 }

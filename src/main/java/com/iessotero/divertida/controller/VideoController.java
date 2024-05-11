@@ -23,21 +23,6 @@ public class VideoController {
 		return videoService.getAllVideos();
 	}
 
-	@GetMapping("/delete/{idVideo}/{idUser}")
-	public void deleteFavoriteVideo(@PathVariable Long idVideo, @PathVariable Long idUser) {
-		this.videoService.deleteFavoriteVideos(idVideo, idUser);
-	}
-
-	@GetMapping("/addFavorite/{idVideo}/{idUser}")
-	public void addFavoriteVideo(@PathVariable Long idVideo, @PathVariable Long idUser) {
-		this.videoService.addFavoriteVideo(idVideo, idUser);
-	}
-//
-//	@GetMapping("/favorites/{idUser}")
-//	public List<Videos> getFavoritesVideos(@PathVariable Long idUser) {
-//		return this.videoService.findFavoritesVideos(idUser);
-//	}
-
 	@GetMapping("/recommended")
 	public List<Videos> getRecommendedVideos() {
 		return this.videoService.recommendedVideos();
