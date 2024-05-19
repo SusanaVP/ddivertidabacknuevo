@@ -32,10 +32,32 @@ public class JwtService {
 		Date issuedAt = new Date(System.currentTimeMillis());
 		Date expiration = new Date(issuedAt.getTime() + (EXPIRATION_MINUTES * 60 * 1000));
 
-		return Jwts.builder().setClaims(extraClaims).setSubject(user.getName()).setIssuedAt(issuedAt)
-				.setExpiration(expiration).setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-				.signWith(SignatureAlgorithm.HS256, generateKey()).compact();
+		return Jwts.builder()
+				.setClaims(extraClaims)
+				.setSubject(user.getEmail())
+				.setIssuedAt(issuedAt)
+				.setExpiration(expiration)
+				.setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+				.signWith(generateKey(), SignatureAlgorithm.HS256)
+	            .compact();
 	}
+	
+//	public String generateToken(User user, Map<String, Object> extraClaims) {
+//	    Date issuedAt = new Date(System.currentTimeMillis());
+//	    Date expiration = new Date(issuedAt.getTime() + (EXPIRATION_MINUTES * 60 * 1000));
+//
+//	    // Crear un nuevo mapa de reclamaciones
+//	    Map<String, Object> claims = new HashMap<>(extraClaims);
+//	    claims.put(Claims.SUBJECT, user.getName());
+//
+//	    return Jwts.builder()
+//	            .setClaims(claims)
+//	            .setIssuedAt(issuedAt)
+//	            .setExpiration(expiration)
+//	            .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+//	            .signWith(SignatureAlgorithm.HS256, generateKey())
+//	            .compact();
+//	}
 
 	public String extractUsername(String jwt) {
 
@@ -50,10 +72,12 @@ public class JwtService {
 
 	}
 
-	private Claims extractAllClaims(String jwt) {
-		 return Jwts.parser()
+	   private Claims extractAllClaims(String jwt) {
+	        return Jwts
+	                .parserBuilder()
 	                .setSigningKey(generateKey())
+	                .build()
 	                .parseClaimsJws(jwt)
 	                .getBody();
-	}
+	    }
 }
