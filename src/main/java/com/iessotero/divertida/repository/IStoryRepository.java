@@ -12,16 +12,12 @@ import com.iessotero.divertida.model.Stories;
 @Repository
 public interface IStoryRepository extends JpaRepository<Stories, Long> {
 
-	/*@Query("SELECT scm.stories.id FROM StoryCategoriesMapping scm WHERE scm.categoriesStory.id IN :categoryIds")
-	List<Long> findStoryIdsByCategoryIds(@Param("categoryIds") List<Long> categoryIds);*/
-
 	@Query("SELECT s FROM Stories s WHERE s.id IN :storyIds")
 	List<Stories> findStoriesByIds(@Param("storyIds") List<Long> storyIds);
 
 	@Query("SELECT cs.id FROM CategoriesStory cs WHERE cs.nameCategory like %:category%")
 	Long findCategoryStoryId(@Param("category") String category);
 
-	
 	@Query("SELECT s FROM Stories s WHERE s.categoriesStory.id = :categoryId")
-	 List<Stories> findByCategoriesStoryId(@Param("categoryId") Long categoryId);
+	List<Stories> findByCategoriesStoryId(@Param("categoryId") Long categoryId);
 }

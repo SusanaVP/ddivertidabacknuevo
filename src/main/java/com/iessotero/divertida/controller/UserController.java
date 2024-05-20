@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,6 +49,7 @@ public class UserController {
 		}
 	}
 
+	
 	@GetMapping("/findByEmail")
 	public ResponseEntity<User> findByEmail(@RequestParam String email) {
 		Optional<User> userOptional = userService.findByEmail(email);
@@ -85,8 +87,9 @@ public class UserController {
 		}
 	}
 
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/getUser/{id}")
-	public ResponseEntity<User> finduserById(@PathVariable Long id) {
+	public ResponseEntity<User> findUserById(@PathVariable Long id) {
 		Optional<User> userOptional = userService.findUserById(id);
 		if (userOptional.isPresent()) {
 			return ResponseEntity.ok().body(userOptional.get());

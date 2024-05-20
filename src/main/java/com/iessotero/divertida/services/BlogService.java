@@ -1,4 +1,5 @@
 package com.iessotero.divertida.services;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +33,9 @@ public class BlogService {
 	public List<Blog> getAllBlogsNoValidated() {
 		return blogRepository.getAllBlogsNoValidated();
 	}
+
+	public void updateValidation(Long idBlog) {
+		blogRepository.updateValidation(idBlog);
+	}
+
 }

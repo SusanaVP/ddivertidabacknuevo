@@ -35,4 +35,9 @@ public interface IBlogRepository extends JpaRepository<Blog, Long> {
 
 	@Query("SELECT b FROM Blog b WHERE b.validated = false")
 	List<Blog> getAllBlogsNoValidated();
+
+	@Modifying
+	@Transactional
+	@Query("UPDATE Blog b SET b.validated = true WHERE b.id = :idBlog")
+	void updateValidation(Long idBlog);
 }

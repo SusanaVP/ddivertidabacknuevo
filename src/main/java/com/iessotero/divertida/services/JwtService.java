@@ -32,52 +32,21 @@ public class JwtService {
 		Date issuedAt = new Date(System.currentTimeMillis());
 		Date expiration = new Date(issuedAt.getTime() + (EXPIRATION_MINUTES * 60 * 1000));
 
-		return Jwts.builder()
-				.setClaims(extraClaims)
-				.setSubject(user.getEmail())
-				.setIssuedAt(issuedAt)
-				.setExpiration(expiration)
-				.setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-				.signWith(generateKey(), SignatureAlgorithm.HS256)
-	            .compact();
+		return Jwts.builder().setClaims(extraClaims).setSubject(user.getEmail()).setIssuedAt(issuedAt)
+				.setExpiration(expiration).setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+				.signWith(generateKey(), SignatureAlgorithm.HS256).compact();
 	}
-	
-//	public String generateToken(User user, Map<String, Object> extraClaims) {
-//	    Date issuedAt = new Date(System.currentTimeMillis());
-//	    Date expiration = new Date(issuedAt.getTime() + (EXPIRATION_MINUTES * 60 * 1000));
-//
-//	    // Crear un nuevo mapa de reclamaciones
-//	    Map<String, Object> claims = new HashMap<>(extraClaims);
-//	    claims.put(Claims.SUBJECT, user.getName());
-//
-//	    return Jwts.builder()
-//	            .setClaims(claims)
-//	            .setIssuedAt(issuedAt)
-//	            .setExpiration(expiration)
-//	            .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-//	            .signWith(SignatureAlgorithm.HS256, generateKey())
-//	            .compact();
-//	}
 
 	public String extractUsername(String jwt) {
-
 		return extractAllClaims(jwt).getSubject();
-
 	}
 
 	private Key generateKey() {
 		byte[] secretAsBytes = Decoders.BASE64.decode(SECRET_KEY);
-		System.out.println("Mi token: " + Arrays.toString(secretAsBytes));
 		return Keys.hmacShaKeyFor(secretAsBytes);
-
 	}
 
-	   private Claims extractAllClaims(String jwt) {
-	        return Jwts
-	                .parserBuilder()
-	                .setSigningKey(generateKey())
-	                .build()
-	                .parseClaimsJws(jwt)
-	                .getBody();
-	    }
+	private Claims extractAllClaims(String jwt) {
+		return Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody();
+	}
 }

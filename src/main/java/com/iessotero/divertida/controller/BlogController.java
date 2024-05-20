@@ -34,6 +34,17 @@ public class BlogController {
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/editValidation/{idBlog}")
+	public ResponseEntity<String> editValidation(@PathVariable Long idBlog) {
+		try {
+			this.blogService.updateValidation(idBlog);
+			return new ResponseEntity<>("OK blog validation", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Error blog validation", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/blogNoValidated")
 	public List<Blog> getBlogNoValidated() {
 		return blogService.getAllBlogsNoValidated();
