@@ -21,7 +21,7 @@ public interface IBlogRepository extends JpaRepository<Blog, Long> {
 	@Modifying
 	@Transactional
 	@Query("UPDATE Blog b SET b.likes = b.likes + 1 WHERE b.id = :idBlog")
-	void likesPlus(Long idBlog);
+	void likesPlus(@Param("idBlog")Long idBlog);
 
 	@Modifying
 	@Transactional
@@ -39,5 +39,5 @@ public interface IBlogRepository extends JpaRepository<Blog, Long> {
 	@Modifying
 	@Transactional
 	@Query("UPDATE Blog b SET b.validated = true WHERE b.id = :idBlog")
-	void updateValidation(Long idBlog);
+	void updateValidation(@Param("idBlog")Long idBlog);
 }

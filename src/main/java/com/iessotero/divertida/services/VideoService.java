@@ -25,4 +25,12 @@ public class VideoService {
 		return videoRepository.findVideosByCategory(category);
 	}
 
+	public void deleteRecommendedVideo(Long idVideo) {
+		videoRepository.deleteRecommendedVideo(idVideo);
+	}
+
+	public void addRecommendedVideo(Long idVideo) {
+		videoRepository.addRecommendedVideo(idVideo);
+	}
+
 }

@@ -38,4 +38,8 @@ public class BlogService {
 		blogRepository.updateValidation(idBlog);
 	}
 
+	public void deleteBlog(Long idBlog) {
+		blogRepository.deleteById(idBlog);
+	}
+
 }

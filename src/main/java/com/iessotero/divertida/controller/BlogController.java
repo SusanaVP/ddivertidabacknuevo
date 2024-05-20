@@ -73,4 +73,15 @@ public class BlogController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/deleteBlog/{idBlog}")
+	public ResponseEntity<String> deleteBlog(@PathVariable Long idBlog) {
+		try {
+			this.blogService.deleteBlog(idBlog);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
