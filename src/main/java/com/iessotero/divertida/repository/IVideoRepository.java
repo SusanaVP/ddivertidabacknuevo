@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.iessotero.divertida.model.CategoriesVideo;
 import com.iessotero.divertida.model.Videos;
 
 import jakarta.transaction.Transactional;
@@ -30,5 +31,8 @@ public interface IVideoRepository extends JpaRepository<Videos, Long> {
 	@Transactional
 	@Query("UPDATE Videos v SET v.recommended = false WHERE v.id = :idVideo")
 	void deleteRecommendedVideo(@Param("idVideo")Long idVideo);
+
+	@Query("SELECT cv FROM CategoriesVideo cv ")
+	List<CategoriesVideo> findAllCategoriesVideo();
 
 }

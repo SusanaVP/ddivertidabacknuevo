@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.iessotero.divertida.model.CategoriesVideo;
 import com.iessotero.divertida.model.Videos;
 import com.iessotero.divertida.repository.IVideoRepository;
 
@@ -31,6 +33,18 @@ public class VideoService {
 
 	public void addRecommendedVideo(Long idVideo) {
 		videoRepository.addRecommendedVideo(idVideo);
+	}
+
+	public Videos saveVideo(Videos video) {
+		return videoRepository.save(video);
+	}
+
+	public List<CategoriesVideo> getVideoCategories() {
+		return videoRepository.findAllCategoriesVideo();
+	}
+
+	public void deleteVideo(Long idVideo) {
+		videoRepository.deleteById(idVideo);
 	}
 
 }
