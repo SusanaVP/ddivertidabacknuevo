@@ -34,10 +34,18 @@ public class Events {
 
 	@Column
 	private Date date;
-
+	
+	@Column
 	private Float latitude;
 
+	@Column
 	private Float longitude;
+	
+	@Column
+	private String town;
+	
+	@Column
+	private String city;
 
 	public Events() {
 	}
@@ -114,4 +122,21 @@ public class Events {
 		this.id = id;
 	}
 
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	
 }

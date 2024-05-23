@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.iessotero.divertida.model.CategoriesRiddles;
 import com.iessotero.divertida.model.Riddles;
 
 @Repository
@@ -19,4 +21,7 @@ public interface IRiddlesRepository extends JpaRepository<Riddles, Long> {
 
 	@Query("SELECT r FROM Riddles r WHERE r.categoriesRiddles.id = :categoryId")
 	List<Riddles> findByCategoriesRiddleId(@Param("categoryId") Long categoryId);
+
+	@Query("SELECT cr FROM CategoriesRiddles cr ")
+	List<CategoriesRiddles> findAllCategoriesRiddles();
 }

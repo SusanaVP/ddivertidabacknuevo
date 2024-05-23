@@ -17,4 +17,12 @@ public class EventsService {
 	public List<Events> getAllEvents() {
 		return (List<Events>) eventsRepository.findAllEvents();
 	}
+
+	public void addEvent(Events event) {
+		eventsRepository.save(event);
+	}
+
+	public void deleteBlog(Long idEvent) {
+		eventsRepository.deleteById(idEvent);
+	}
 }
