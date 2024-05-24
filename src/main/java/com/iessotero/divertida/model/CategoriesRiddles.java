@@ -19,7 +19,6 @@ public class CategoriesRiddles {
 	private String nameCategory;
 
 	public CategoriesRiddles() {
-		super();
 	}
 
 	public Long getId() {

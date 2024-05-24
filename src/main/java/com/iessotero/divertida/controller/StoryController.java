@@ -34,7 +34,7 @@ public class StoryController {
 		return this.storyService.getStoryById(categoryId);
 	}
 
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addStory")
 	public ResponseEntity<String> addStory(@RequestBody Stories story) {
 		try {

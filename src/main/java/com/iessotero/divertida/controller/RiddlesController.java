@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iessotero.divertida.model.CategoriesRiddles;
-import com.iessotero.divertida.model.CategoriesStory;
 import com.iessotero.divertida.model.Riddles;
 import com.iessotero.divertida.services.RiddlesService;
 
@@ -35,8 +34,7 @@ public class RiddlesController {
 		return this.riddlesService.getRiddlesById(categoryId);
 	}
 	
-
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addRiddle")
 	public ResponseEntity<String> addRiddle(@RequestBody Riddles riddle) {
 		try {
@@ -46,7 +44,7 @@ public class RiddlesController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/deleteRiddle/{idRiddle}")
 	public ResponseEntity<String> deleteRiddle(@PathVariable Long idRiddle) {
@@ -57,7 +55,7 @@ public class RiddlesController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@GetMapping("/riddlesCategories")
 	public List<CategoriesRiddles> getRiddlesCategories() {
 		return this.riddlesService.getRiddleCategories();
