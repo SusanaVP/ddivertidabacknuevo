@@ -42,13 +42,15 @@ public class EventsController {
      * @param event los datos del evento a añadir.
      * @return una respuesta con el estado de la operación.
      */
-    @PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addEvent")
     public ResponseEntity<String> addEvent(@RequestBody Events event) {
         try {
             this.eventsService.addEvent(event);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
+        	  System.out.println("Error al añadir un evento");
+			    e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

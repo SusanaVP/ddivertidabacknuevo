@@ -54,6 +54,7 @@ public class UserController {
 		if (savedUser != null) {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
+			 System.out.println("Error al registrarse");
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -71,6 +72,7 @@ public class UserController {
 		if (userOptional.isPresent()) {
 			return ResponseEntity.ok().body(userOptional.get());
 		} else {
+			 System.out.println("Error al obteenr usuario por email");
 			return ResponseEntity.notFound().build();
 		}
 	}
