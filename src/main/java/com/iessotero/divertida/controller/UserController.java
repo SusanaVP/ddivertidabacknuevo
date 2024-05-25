@@ -66,8 +66,8 @@ public class UserController {
 	 * @return un ResponseEntity con el usuario correspondiente o un estado HTTP
 	 *         apropiado si no se encuentra.
 	 */
-	@GetMapping("/findByEmail")
-	public ResponseEntity<User> findByEmail(@RequestParam String email) {
+	@GetMapping("/findByEmail/{email}")
+	public ResponseEntity<User> findByEmail(@PathVariable String email) {
 		Optional<User> userOptional = userService.findByEmail(email);
 		if (userOptional.isPresent()) {
 			return ResponseEntity.ok().body(userOptional.get());
