@@ -72,7 +72,7 @@ public class UserController {
 		if (userOptional.isPresent()) {
 			return ResponseEntity.ok().body(userOptional.get());
 		} else {
-			 System.out.println("Error al obteenr usuario por email");
+			 System.out.println("Error al obteenr usuario por email backend");
 			return ResponseEntity.notFound().build();
 		}
 	}
