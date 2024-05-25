@@ -11,12 +11,22 @@ import org.springframework.stereotype.Service;
 import com.iessotero.divertida.model.User;
 import com.iessotero.divertida.repository.IUserRepository;
 
+/**
+ * Servicio personalizado para cargar los detalles del usuario.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private IUserRepository userRepository;
 
+    /**
+     * Carga los detalles del usuario por su nombre de usuario (email).
+     *
+     * @param email, es el email del usuario.
+     * @return los detalles del usuario cargado.
+     * @throws UsernameNotFoundException si el usuario no se encuentra.
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByEmail(email);

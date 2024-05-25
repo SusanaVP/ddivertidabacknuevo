@@ -7,111 +7,198 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * Representa un usuario en la aplicación.
+ */
 @Entity
 @Table(name = "users")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    /** Identificador único del usuario. */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(length = 100)
-	private String name;
+    /** Nombre del usuario. */
+    @Column(length = 100)
+    private String name;
 
-	@Column(name = "last_name", length = 100)
-	private String lastName;
+    /** Apellido del usuario. */
+    @Column(name = "last_name", length = 100)
+    private String lastName;
 
-	@Column(length = 255)
-	private String email;
+    /** Correo electrónico del usuario. */
+    @Column(length = 255)
+    private String email;
 
-	@Column
-	private String date;
+    /** Fecha de registro del usuario. */
+    @Column
+    private String date;
 
-	@Column(length = 20)
-	private String movil;
+    /** Número de teléfono móvil del usuario. */
+    @Column(length = 20)
+    private String movil;
 
-	@Column(length = 255)
-	private String password;
+    /** Contraseña del usuario. */
+    @Column(length = 255)
+    private String password;
 
-	@Column(name = "postal_code", length = 255)
-	private String postalCode;
+    /** Código postal del usuario. */
+    @Column(name = "postal_code", length = 255)
+    private String postalCode;
 
-	@Column
-	private Boolean admin = false;
+    /** Indicador de si el usuario es administrador o no. */
+    @Column
+    private Boolean admin = false;
 
-	public User() {
-	}
+    /**
+     * Constructor por defecto de la clase User.
+     */
+    public User() {
+    }
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * Obtiene el nombre del usuario.
+     * @return El nombre del usuario.
+     */
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Establece el nombre del usuario.
+     * @param name El nuevo nombre del usuario.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    /**
+     * Obtiene el apellido del usuario.
+     * @return El apellido del usuario.
+     */
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    /**
+     * Establece el apellido del usuario.
+     * @param lastName El nuevo apellido del usuario.
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Obtiene el correo electrónico del usuario.
+     * @return El correo electrónico del usuario.
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Establece el correo electrónico del usuario.
+     * @param email El nuevo correo electrónico del usuario.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    /**
+     * Obtiene la fecha de registro del usuario.
+     * @return La fecha de registro del usuario.
+     */
+    public String getDate() {
+        return date;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    /**
+     * Establece la fecha de registro del usuario.
+     * @param date La nueva fecha de registro del usuario.
+     */
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public String getMovil() {
-		return movil;
-	}
+    /**
+     * Obtiene el número de teléfono móvil del usuario.
+     * @return El número de teléfono móvil del usuario.
+     */
+    public String getMovil() {
+        return movil;
+    }
 
-	public void setMovil(String movil) {
-		this.movil = movil;
-	}
+    /**
+     * Establece el número de teléfono móvil del usuario.
+     * @param movil El nuevo número de teléfono móvil del usuario.
+     */
+    public void setMovil(String movil) {
+        this.movil = movil;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * Obtiene la contraseña del usuario.
+     * @return La contraseña del usuario.
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * Establece la contraseña del usuario.
+     * @param password La nueva contraseña del usuario.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getPostalCode() {
-		return postalCode;
-	}
+    /**
+     * Obtiene el código postal del usuario.
+     * @return El código postal del usuario.
+     */
+    public String getPostalCode() {
+        return postalCode;
+    }
 
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
+    /**
+     * Establece el código postal del usuario.
+     * @param postalCode El nuevo código postal del usuario.
+     */
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 
-	public Boolean getAdmin() {
-		return admin;
-	}
+    /**
+     * Indica si el usuario es administrador.
+     * @return true si el usuario es administrador, false en caso contrario.
+     */
+    public Boolean getAdmin() {
+        return admin;
+    }
 
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
-	}
+    /**
+     * Establece si el usuario es administrador.
+     * @param admin true si el usuario es administrador, false en caso contrario.
+     */
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Obtiene el identificador único del usuario.
+     * @return El identificador único del usuario.
+     */
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Establece el identificador único del usuario.
+     * @param id El nuevo identificador único del usuario.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }

@@ -16,85 +16,157 @@ import com.iessotero.divertida.repository.IRiddlesRepository;
 import com.iessotero.divertida.repository.IStoryRepository;
 import com.iessotero.divertida.repository.IVideoRepository;
 
+/**
+ * Servicio para gestionar las operaciones relacionadas con los favoritos.
+ */
 @Service
 public class FavoriteService {
-	@Autowired
-	private IFavoriteRepository favoriteRepository;
 
-	@Autowired
-	private IVideoRepository videoRepository;
+    @Autowired
+    private IFavoriteRepository favoriteRepository;
 
-	@Autowired
-	private IStoryRepository storyRepository;
+    @Autowired
+    private IVideoRepository videoRepository;
 
-	@Autowired
-	private IRiddlesRepository riddlesRepository;
+    @Autowired
+    private IStoryRepository storyRepository;
 
-	@Autowired
-	private IEventsRepository eventsRepository;
+    @Autowired
+    private IRiddlesRepository riddlesRepository;
 
-	public List<Favorites> getFavoritesIdUser(Long idUser) {
-		return (List<Favorites>) favoriteRepository.findFavoritesIdUser(idUser);
-	}
+    @Autowired
+    private IEventsRepository eventsRepository;
 
-	public List<Videos> getFavoritesVideos(Long idUser) {
-		List<Long> idVideos = findIdVideosFavorites(idUser);
+    /**
+     * Obtiene la lista de favoritos de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de objetos {@link Favorites}.
+     */
+    public List<Favorites> getFavoritesIdUser(Long idUser) {
+        return favoriteRepository.findFavoritesIdUser(idUser);
+    }
 
-		if (!idVideos.isEmpty()) {
-			return videoRepository.findAllById(idVideos);
-		}
-		return null;
-	}
+    /**
+     * Obtiene la lista de videos favoritos de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de objetos {@link Videos} o null si no hay favoritos.
+     */
+    public List<Videos> getFavoritesVideos(Long idUser) {
+        List<Long> idVideos = findIdVideosFavorites(idUser);
 
-	public List<Stories> getFavoritesStories(Long idUser) {
-		List<Long> idStories = findIdStoriesFavorites(idUser);
+        if (!idVideos.isEmpty()) {
+            return videoRepository.findAllById(idVideos);
+        }
+        return null;
+    }
 
-		if (!idStories.isEmpty()) {
-			return storyRepository.findAllById(idStories);
-		}
-		return null;
-	}
+    /**
+     * Obtiene la lista de historias favoritas de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de objetos {@link Stories} o null si no hay favoritos.
+     */
+    public List<Stories> getFavoritesStories(Long idUser) {
+        List<Long> idStories = findIdStoriesFavorites(idUser);
 
-	public List<Riddles> getFavoritesRiddles(Long idUser) {
-		List<Long> idRiddles = findIdRiddlesFavorites(idUser);
+        if (!idStories.isEmpty()) {
+            return storyRepository.findAllById(idStories);
+        }
+        return null;
+    }
 
-		if (!idRiddles.isEmpty()) {
-			return riddlesRepository.findAllById(idRiddles);
-		}
-		return null;
-	}
+    /**
+     * Obtiene la lista de adivinanzas favoritos de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de objetos {@link Riddles} o null si no hay favoritos.
+     */
+    public List<Riddles> getFavoritesRiddles(Long idUser) {
+        List<Long> idRiddles = findIdRiddlesFavorites(idUser);
 
-	public List<Events> getFavoritesEvents(Long idUser) {
-		List<Long> idEvents = findIdEventsFavorites(idUser);
+        if (!idRiddles.isEmpty()) {
+            return riddlesRepository.findAllById(idRiddles);
+        }
+        return null;
+    }
 
-		if (!idEvents.isEmpty()) {
-			return eventsRepository.findAllById(idEvents);
-		}
-		return null;
-	}
+    /**
+     * Obtiene la lista de eventos favoritos de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de objetos {@link Events} o null si no hay favoritos.
+     */
+    public List<Events> getFavoritesEvents(Long idUser) {
+        List<Long> idEvents = findIdEventsFavorites(idUser);
 
-	private List<Long> findIdVideosFavorites(Long idUser) {
-		return favoriteRepository.findIdVideosFavorites(idUser);
-	}
+        if (!idEvents.isEmpty()) {
+            return eventsRepository.findAllById(idEvents);
+        }
+        return null;
+    }
 
-	private List<Long> findIdStoriesFavorites(Long idUser) {
-		return favoriteRepository.findIdStoriesFavorites(idUser);
-	}
+    /**
+     * Obtiene una lista de IDs de videos favoritos de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de IDs de videos favoritos.
+     */
+    private List<Long> findIdVideosFavorites(Long idUser) {
+        return favoriteRepository.findIdVideosFavorites(idUser);
+    }
 
-	private List<Long> findIdRiddlesFavorites(Long idUser) {
-		return favoriteRepository.findIdRiddlesFavorites(idUser);
-	}
+    /**
+     * Obtiene una lista de IDs de historias favoritas de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de IDs de historias favoritas.
+     */
+    private List<Long> findIdStoriesFavorites(Long idUser) {
+        return favoriteRepository.findIdStoriesFavorites(idUser);
+    }
 
-	private List<Long> findIdEventsFavorites(Long idUser) {
-		return favoriteRepository.findIdEventsFavorites(idUser);
-	}
+    /**
+     * Obtiene una lista de IDs de adivinanzas favoritos de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de IDs de adivinanzas favoritos.
+     */
+    private List<Long> findIdRiddlesFavorites(Long idUser) {
+        return favoriteRepository.findIdRiddlesFavorites(idUser);
+    }
 
-	public void addFavorite(Long contentId, Long idUser, String contentType) {
-		favoriteRepository.addFavorite(contentId, idUser, contentType);
-	}
+    /**
+     * Obtiene una lista de IDs de eventos favoritos de un usuario dado su ID.
+     *
+     * @param idUser el ID del usuario.
+     * @return una lista de IDs de eventos favoritos.
+     */
+    private List<Long> findIdEventsFavorites(Long idUser) {
+        return favoriteRepository.findIdEventsFavorites(idUser);
+    }
 
-	public void deleteFavorite(Long contentId, Long idUser, String contentType) {
-		favoriteRepository.deleteFavorite(contentId, idUser, contentType);
-	}
+    /**
+     * Añade un contenido a los favoritos de un usuario.
+     *
+     * @param contentId el ID del contenido a añadir.
+     * @param idUser el ID del usuario.
+     * @param contentType el tipo de contenido a añadir.
+     */
+    public void addFavorite(Long contentId, Long idUser, String contentType) {
+        favoriteRepository.addFavorite(contentId, idUser, contentType);
+    }
+
+    /**
+     * Elimina un contenido de los favoritos de un usuario.
+     *
+     * @param contentId el ID del contenido a eliminar.
+     * @param idUser el ID del usuario.
+     * @param contentType el tipo de contenido a eliminar.
+     */
+    public void deleteFavorite(Long contentId, Long idUser, String contentType) {
+        favoriteRepository.deleteFavorite(contentId, idUser, contentType);
+    }
 
 }

@@ -9,58 +9,116 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Esta clase representa la entidad Favoritos, que almacena la relación entre un usuario y contenido marcado como favorito.
+ */
 @Entity
 @Table(name = "favorites")
 public class Favorites {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    /**
+     * Identificador único de favorito.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+    /**
+     * Usuario al que pertenece el favorito.
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-	@Column(name = "content_id")
-	private Long contentId;
+    /**
+     * Identificador del contenido marcado como favorito.
+     */
+    @Column(name = "content_id")
+    private Long contentId;
 
-	@Column
-	private String contentType;
+    /**
+     * Tipo de contenido marcado como favorito.
+     */
+    @Column
+    private String contentType;
 
-	public Favorites() {
+    /**
+     * Constructor por defecto de la clase Favorites.
+     */
+    public Favorites() {
 
-	}
+    }
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Obtiene el identificador único del favorito.
+     *
+     * @return El identificador único del favorito.
+     */
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Establece el identificador único del favorito.
+     *
+     * @param id El nuevo identificador único del favorito.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    /**
+     * Obtiene el usuario al que pertenece el favorito.
+     *
+     * @return El usuario al que pertenece el favorito.
+     */
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    /**
+     * Establece el usuario al que pertenece el favorito.
+     *
+     * @param user El nuevo usuario al que pertenece el favorito.
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public Long getContentId() {
-		return contentId;
-	}
+    /**
+     * Obtiene el identificador del contenido marcado como favorito.
+     *
+     * @return El identificador del contenido marcado como favorito.
+     */
+    public Long getContentId() {
+        return contentId;
+    }
 
-	public void setContentId(Long contentId) {
-		this.contentId = contentId;
-	}
+    /**
+     * Establece el identificador del contenido marcado como favorito.
+     *
+     * @param contentId El nuevo identificador del contenido marcado como favorito.
+     */
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
+    }
 
-	public String getContentType() {
-		return contentType;
-	}
+    /**
+     * Obtiene el tipo de contenido marcado como favorito.
+     *
+     * @return El tipo de contenido marcado como favorito.
+     */
+    public String getContentType() {
+        return contentType;
+    }
 
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
+    /**
+     * Establece el tipo de contenido marcado como favorito.
+     *
+     * @param contentType El nuevo tipo de contenido marcado como favorito.
+     */
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
 
 }

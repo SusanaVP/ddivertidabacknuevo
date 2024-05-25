@@ -1,6 +1,5 @@
 package com.iessotero.divertida.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,80 +9,138 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Representa un video en la aplicación.
+ */
 @Entity
 @Table(name = "videos")
 public class Videos {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    /** Identificador único del video. */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(length = 255)
-	private String description;
+    /** Descripción del video. */
+    @Column(length = 255)
+    private String description;
 
-	@Column
-	private boolean recommended = false;
+    /** Indica si el video es recomendado. */
+    @Column
+    private boolean recommended = false;
 
-	@Column(length = 255)
-	private String title;
+    /** Título del video. */
+    @Column(length = 255)
+    private String title;
 
-	@Column(length = 255)
-	private String url;
+    /** URL del video. */
+    @Column(length = 255)
+    private String url;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "category_id")
-	private CategoriesVideo categoriesVideo;
-	
-	public Videos() {
-	}
+    /** Categoría del video. */
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    private CategoriesVideo categoriesVideo;
 
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Constructor por defecto de la clase Videos.
+     */
+    public Videos() {
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * Obtiene la descripción del video.
+     * @return La descripción del video.
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	public boolean isRecommended() {
-		return recommended;
-	}
+    /**
+     * Establece la descripción del video.
+     * @param description La nueva descripción del video.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setRecommended(boolean recommended) {
-		this.recommended = recommended;
-	}
+    /**
+     * Indica si el video es recomendado.
+     * @return true si el video es recomendado, false en caso contrario.
+     */
+    public boolean isRecommended() {
+        return recommended;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * Establece si el video es recomendado.
+     * @param recommended true si el video es recomendado, false en caso contrario.
+     */
+    public void setRecommended(boolean recommended) {
+        this.recommended = recommended;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * Obtiene el título del video.
+     * @return El título del video.
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    /**
+     * Establece el título del video.
+     * @param title El nuevo título del video.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    /**
+     * Obtiene la URL del video.
+     * @return La URL del video.
+     */
+    public String getUrl() {
+        return url;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Establece la URL del video.
+     * @param url La nueva URL del video.
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Obtiene el identificador único del video.
+     * @return El identificador único del video.
+     */
+    public Long getId() {
+        return id;
+    }
 
-	public CategoriesVideo getCategoriesVideo() {
-		return categoriesVideo;
-	}
+    /**
+     * Establece el identificador único del video.
+     * @param id El nuevo identificador único del video.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setCategoriesVideo(CategoriesVideo categoriesVideo) {
-		this.categoriesVideo = categoriesVideo;
-	}
-	
+    /**
+     * Obtiene la categoría del video.
+     * @return La categoría del video.
+     */
+    public CategoriesVideo getCategoriesVideo() {
+        return categoriesVideo;
+    }
 
+    /**
+     * Establece la categoría del video.
+     * @param categoriesVideo La nueva categoría del video.
+     */
+    public void setCategoriesVideo(CategoriesVideo categoriesVideo) {
+        this.categoriesVideo = categoriesVideo;
+    }
 }

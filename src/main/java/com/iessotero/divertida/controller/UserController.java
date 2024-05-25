@@ -26,6 +26,9 @@ import com.iessotero.divertida.services.UserService;
 
 import jakarta.validation.Valid;
 
+/**
+ * Controlador para gestionar operaciones relacionadas con usuarios.
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -39,6 +42,12 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	/**
+	 * Endpoint para registrar un nuevo usuario.
+	 *
+	 * @param user el objeto {@link User} a registrar.
+	 * @return un ResponseEntity con el estado HTTP correspondiente.
+	 */
 	@PostMapping("/register")
 	public ResponseEntity<String> saveUser(@RequestBody User user) {
 		User savedUser = userService.saveUser(user);
@@ -49,24 +58,33 @@ public class UserController {
 		}
 	}
 
-	
+	/**
+	 * Busca un usuario por su dirección de correo electrónico.
+	 *
+	 * @param email la dirección de correo electrónico del usuario.
+	 * @return un ResponseEntity con el usuario correspondiente o un estado HTTP
+	 *         apropiado si no se encuentra.
+	 */
 	@GetMapping("/findByEmail")
 	public ResponseEntity<User> findByEmail(@RequestParam String email) {
 		Optional<User> userOptional = userService.findByEmail(email);
 		if (userOptional.isPresent()) {
 			return ResponseEntity.ok().body(userOptional.get());
 		} else {
-			return ResponseEntity.ok().build();
+			return ResponseEntity.notFound().build();
 		}
 	}
 
+	/**
+	 * Endpoint para iniciar sesión y generar un token JWT.
+	 *
+	 * @param authenticationRequest la solicitud de autenticación.
+	 * @return un ResponseEntity con el token JWT generado.
+	 * @throws Exception si las credenciales son inválidas.
+	 */
 	@PostMapping(value = "/login")
 	public ResponseEntity<JwtResponse> login(@RequestBody @Valid Login authenticationRequest) throws Exception {
-
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-
-		System.out.print(authenticationRequest);
-
 		UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 		Optional<User> userOptional = userService.findByEmail(authenticationRequest.getEmail());
 
@@ -79,6 +97,13 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Autentica un usuario utilizando Spring Security.
+	 *
+	 * @param email    la dirección de correo electrónico del usuario.
+	 * @param password la contraseña del usuario.
+	 * @throws Exception si las credenciales son inválidas.
+	 */
 	private void authenticate(String email, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
@@ -87,6 +112,13 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Obtiene un usuario por su ID.
+	 *
+	 * @param id el ID del usuario.
+	 * @return un ResponseEntity con el usuario correspondiente o un estado HTTP
+	 *         apropiado si no se encuentra.
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/getUser/{id}")
 	public ResponseEntity<User> findUserById(@PathVariable Long id) {
@@ -98,6 +130,12 @@ public class UserController {
 		}
 	}
 
+	/**
+	 * Obtiene los detalles del usuario autenticado.
+	 *
+	 * @param userDetails los detalles del usuario autenticado.
+	 * @return los detalles del usuario autenticado.
+	 */
 	@PostMapping("/details")
 	public UserDetails getUserDetails(@AuthenticationPrincipal UserDetails userDetails) {
 		return userDetails;

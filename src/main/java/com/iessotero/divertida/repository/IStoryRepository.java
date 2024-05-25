@@ -10,18 +10,44 @@ import org.springframework.stereotype.Repository;
 import com.iessotero.divertida.model.CategoriesStory;
 import com.iessotero.divertida.model.Stories;
 
+/**
+ * Repositorio para gestionar operaciones CRUD y consultas personalizadas para la entidad {@link Stories}.
+ */
 @Repository
 public interface IStoryRepository extends JpaRepository<Stories, Long> {
 
-	@Query("SELECT s FROM Stories s WHERE s.id IN :storyIds")
-	List<Stories> findStoriesByIds(@Param("storyIds") List<Long> storyIds);
+    /**
+     * Busca cuentos por una lista de IDs.
+     *
+     * @param storyIds la lista de IDs de cuentos.
+     * @return una lista de objetos {@link Stories}.
+     */
+    @Query("SELECT s FROM Stories s WHERE s.id IN :storyIds")
+    List<Stories> findStoriesByIds(@Param("storyIds") List<Long> storyIds);
 
-	@Query("SELECT cs.id FROM CategoriesStory cs WHERE cs.nameCategory like %:category%")
-	Long findCategoryStoryId(@Param("category") String category);
+    /**
+     * Busca el ID de una categoría de cuentos por su nombre.
+     *
+     * @param category el nombre de la categoría.
+     * @return el ID de la categoría de cuentos.
+     */
+    @Query("SELECT cs.id FROM CategoriesStory cs WHERE cs.nameCategory like %:category%")
+    Long findCategoryStoryId(@Param("category") String category);
 
-	@Query("SELECT s FROM Stories s WHERE s.categoriesStory.id = :categoryId")
-	List<Stories> findByCategoriesStoryId(@Param("categoryId") Long categoryId);
+    /**
+     * Busca cuentos por el ID de una categoría.
+     *
+     * @param categoryId el ID de la categoría de cuentos.
+     * @return una lista de objetos {@link Stories}.
+     */
+    @Query("SELECT s FROM Stories s WHERE s.categoriesStory.id = :categoryId")
+    List<Stories> findByCategoriesStoryId(@Param("categoryId") Long categoryId);
 
-	@Query("SELECT cs FROM CategoriesStory cs ")
-	List<CategoriesStory> findAllCategoriesStories();
+    /**
+     * Obtiene todas las categorías de cuentos.
+     *
+     * @return una lista de objetos {@link CategoriesStory}.
+     */
+    @Query("SELECT cs FROM CategoriesStory cs ")
+    List<CategoriesStory> findAllCategoriesStories();
 }

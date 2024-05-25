@@ -16,37 +16,57 @@ import org.springframework.web.bind.annotation.RestController;
 import com.iessotero.divertida.model.Events;
 import com.iessotero.divertida.services.EventsService;
 
+/**
+ * Controlador REST para gestionar operaciones relacionadas con eventos.
+ */
 @RestController
 @RequestMapping("/events")
 public class EventsController {
 
-	@Autowired
-	EventsService eventsService;
+    @Autowired
+    EventsService eventsService;
 
-	@GetMapping()
-	public List<Events> getEvents() {
-		return eventsService.getAllEvents();
-	}
-	
-	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/addEvent")
-	public ResponseEntity<String> addEvent(@RequestBody Events event) {
-		try {
-			this.eventsService.addEvent(event);
-			return new ResponseEntity<>(HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/deleteEvent/{idEvent}")
-	public ResponseEntity<String> deleteEVent(@PathVariable Long idEvent) {
-		try {
-			this.eventsService.deleteBlog(idEvent);
-			return new ResponseEntity<>(HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+    /**
+     * Obtiene una lista de todos los eventos.
+     *
+     * @return una lista de objetos {@link Events}.
+     */
+    @GetMapping()
+    public List<Events> getEvents() {
+        return eventsService.getAllEvents();
+    }
+
+    /**
+     * Añade un nuevo evento. Este método puede ser accedido por cualquier usuario autenticado.
+     *
+     * @param event los datos del evento a añadir.
+     * @return una respuesta con el estado de la operación.
+     */
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/addEvent")
+    public ResponseEntity<String> addEvent(@RequestBody Events event) {
+        try {
+            this.eventsService.addEvent(event);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Elimina un evento dado su ID. Este método solo puede ser accedido por administradores.
+     *
+     * @param idEvent el ID del evento a eliminar.
+     * @return una respuesta con el estado de la operación.
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/deleteEvent/{idEvent}")
+    public ResponseEntity<String> deleteEvent(@PathVariable Long idEvent) {
+        try {
+            this.eventsService.deleteEvent(idEvent);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

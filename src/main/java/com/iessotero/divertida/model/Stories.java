@@ -1,6 +1,5 @@
 package com.iessotero.divertida.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,62 +9,104 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Representa un objeto de tipo Historia (Story) en la aplicación.
+ */
 @Entity
 @Table(name = "stories")
 public class Stories {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    /** Identificador único de la historia. */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(columnDefinition = "TEXT")
-	private String description;
+    /** Descripción de la historia. */
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-	@Column(length = 255)
-	private String title;
+    /** Título de la historia. */
+    @Column(length = 255)
+    private String title;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "category_id")
-	private CategoriesStory categoriesStory;
+    /** Categoría a la que pertenece la historia. */
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    private CategoriesStory categoriesStory;
 
-	public Stories() {
-	}
+    /**
+     * Constructor por defecto de la clase Stories.
+     */
+    public Stories() {
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Obtiene la descripción de la historia.
+     * @return La descripción de la historia.
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * Establece la descripción de la historia.
+     * @param description La descripción de la historia.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * Obtiene el título de la historia.
+     * @return El título de la historia.
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * Establece el título de la historia.
+     * @param title El título de la historia.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Obtiene el identificador único de la historia.
+     * @return El identificador único de la historia.
+     */
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Establece el identificador único de la historia.
+     * @param id El identificador único de la historia.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public CategoriesStory getCategoriesStory() {
-		return categoriesStory;
-	}
+    /**
+     * Obtiene la categoría a la que pertenece la historia.
+     * @return La categoría a la que pertenece la historia.
+     */
+    public CategoriesStory getCategoriesStory() {
+        return categoriesStory;
+    }
 
-	public void setCategoriesStory(CategoriesStory categoriesStory) {
-		this.categoriesStory = categoriesStory;
-	}
+    /**
+     * Establece la categoría a la que pertenece la historia.
+     * @param categoriesStory La categoría a la que pertenece la historia.
+     */
+    public void setCategoriesStory(CategoriesStory categoriesStory) {
+        this.categoriesStory = categoriesStory;
+    }
 
-	@Override
-	public String toString() {
-		return "Stories [id=" + id + ", description=" + description + ", title=" + title + "]";
-	}
+    @Override
+    public String toString() {
+        return "Stories [id=" + id + ", description=" + description + ", title=" + title + "]";
+    }
 
 }

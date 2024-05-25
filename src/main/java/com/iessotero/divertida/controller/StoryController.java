@@ -17,47 +17,78 @@ import com.iessotero.divertida.model.CategoriesStory;
 import com.iessotero.divertida.model.Stories;
 import com.iessotero.divertida.services.StoryService;
 
+/**
+ * Controlador REST para gestionar las operaciones relacionadas con los cuentos.
+ */
 @RestController
 @RequestMapping("/story")
 public class StoryController {
 
-	@Autowired
-	StoryService storyService;
+    @Autowired
+    StoryService storyService;
 
-	@GetMapping()
-	public List<Stories> getStories() {
-		return this.storyService.getAllStories();
-	}
+    /**
+     * Obtiene la lista de todos los cuentos.
+     *
+     * @return una lista de objetos {@link Stories}.
+     */
+    @GetMapping()
+    public List<Stories> getStories() {
+        return this.storyService.getAllStories();
+    }
 
-	@GetMapping("/storiesByCategory/{categoryId}")
-	public List<Stories> getStoriesByCategories(@PathVariable Long categoryId) {
-		return this.storyService.getStoryById(categoryId);
-	}
+    /**
+     * Obtiene la lista de cuentos por ID de categoría.
+     *
+     * @param categoryId el ID de la categoría.
+     * @return una lista de objetos {@link Stories}.
+     */
+    @GetMapping("/storiesByCategory/{categoryId}")
+    public List<Stories> getStoriesByCategories(@PathVariable Long categoryId) {
+        return this.storyService.getStoryById(categoryId);
+    }
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/addStory")
-	public ResponseEntity<String> addStory(@RequestBody Stories story) {
-		try {
-			this.storyService.addStory(story);
-			return new ResponseEntity<>(HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+    /**
+     * Añade un nuevo cuento.
+     *
+     * @param story el objeto {@link Stories} que se va a añadir.
+     * @return una respuesta HTTP con el estado OK si se añade correctamente, o INTERNAL_SERVER_ERROR en caso de error.
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/addStory")
+    public ResponseEntity<String> addStory(@RequestBody Stories story) {
+        try {
+            this.storyService.addStory(story);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/deleteStory/{idStory}")
-	public ResponseEntity<String> deleteStory(@PathVariable Long idStory) {
-		try {
-			this.storyService.deleteStory(idStory);
-			return new ResponseEntity<>(HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+    /**
+     * Elimina un cuento dado su ID.
+     *
+     * @param idStory el ID del cuento a eliminar.
+     * @return una respuesta HTTP con el estado OK si se elimina correctamente, o INTERNAL_SERVER_ERROR en caso de error.
+     */
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/deleteStory/{idStory}")
+    public ResponseEntity<String> deleteStory(@PathVariable Long idStory) {
+        try {
+            this.storyService.deleteStory(idStory);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-	@GetMapping("/storyCategories")
-	public List<CategoriesStory> getStoryCategories() {
-		return this.storyService.getStoryCategories();
-	}
+    /**
+     * Obtiene todas las categorías de cuentos.
+     *
+     * @return una lista de objetos {@link CategoriesStory}.
+     */
+    @GetMapping("/storyCategories")
+    public List<CategoriesStory> getStoryCategories() {
+        return this.storyService.getStoryCategories();
+    }
 }
