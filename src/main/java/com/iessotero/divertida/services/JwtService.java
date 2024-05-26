@@ -60,11 +60,24 @@ public class JwtService {
         return extractAllClaims(jwt).getSubject();
     }
 
+    /**
+     * Genera una clave criptográfica utilizando una clave secreta predefinida.
+     * La clave secreta se decodifica a partir de una cadena codificada en Base64.
+     *
+     * @return Un objeto {@link Key} que se puede usar para firmar con HMAC-SHA.
+     */
     private Key generateKey() {
         byte[] secretAsBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(secretAsBytes);
     }
 
+    /**
+     * Extrae todas las reclamaciones de un JWT (JSON Web Token) dado.
+     * El JWT se analiza utilizando una clave generada por el método {@link #generateKey()}.
+     *
+     * @param jwt El JSON Web Token del cual se extraerán las reclamaciones.
+     * @return Un objeto {@link Claims} que contiene las reclamaciones extraídas del JWT.
+     */
     private Claims extractAllClaims(String jwt) {
         return Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody();
     }

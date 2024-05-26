@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 
 import com.iessotero.divertida.services.CustomUserDetailsService;
 
+/**
+ * Configuración de autenticación para la aplicación.
+ */
 @Component
 public class SecurityBeansInjector {
 
@@ -24,11 +27,22 @@ public class SecurityBeansInjector {
 	@Autowired
 	private AuthenticationConfiguration authenticationConfiguration;
 
+	/**
+     * Define el bean para el administrador de autenticación.
+     * 
+     * @return El administrador de autenticación configurado.
+     * @throws Exception Si ocurre un error al configurar el administrador de autenticación.
+     */
 	@Bean
 	public AuthenticationManager authenticationManager() throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 
+	  /**
+     * Define el bean para el proveedor de autenticación.
+     * 
+     * @return El proveedor de autenticación configurado.
+     */
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -38,6 +52,11 @@ public class SecurityBeansInjector {
 		return provider;
 	}
 
+	   /**
+     * Define el bean para el servicio de detalles de usuario.
+     * 
+     * @return El servicio de detalles de usuario configurado.
+     */
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return email -> {
@@ -45,6 +64,11 @@ public class SecurityBeansInjector {
 		};
 	}
 
+	 /**
+     * Define el bean para el codificador de contraseñas.
+     * 
+     * @return El codificador de contraseñas BCrypt configurado.
+     */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

@@ -25,7 +25,21 @@ public class HttpSecurityConfig {
     @Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
-
+    /**
+     * Configura la cadena de filtros de seguridad de la aplicación.
+     * 
+     * Este método define una configuración de seguridad específica para la aplicación,
+     * incluyendo la deshabilitación de la protección CSRF, la configuración de la gestión
+     * de sesiones para ser sin estado (stateless), la adición de un filtro JWT antes del
+     * filtro de autenticación de nombre de usuario y contraseña, y la configuración del
+     * proveedor de autenticación.
+     *
+     * @param httpSecurity El objeto {@link HttpSecurity} que se utiliza para construir
+     *                     la configuración de seguridad.
+     * @return Un objeto {@link SecurityFilterChain} que representa la cadena de filtros
+     *         de seguridad configurada.
+     * @throws Exception Si ocurre un error al configurar la seguridad.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
