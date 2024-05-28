@@ -16,20 +16,16 @@ import jakarta.persistence.Table;
 @Table(name = "stories")
 public class Stories {
 
-    /** Identificador único de la historia. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** Descripción de la historia. */
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    /** Título de la historia. */
     @Column(length = 255)
     private String title;
 
-    /** Categoría a la que pertenece la historia. */
     @ManyToOne()
     @JoinColumn(name = "category_id")
     private CategoriesStory categoriesStory;

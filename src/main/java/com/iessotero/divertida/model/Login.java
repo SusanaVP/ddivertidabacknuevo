@@ -4,15 +4,9 @@ package com.iessotero.divertida.model;
  * Esta clase representa los datos de inicio de sesión de un usuario.
  */
 public class Login {
-    
-    /**
-     * Correo electrónico del usuario para el inicio de sesión.
-     */
+
     private String email;
-    
-    /**
-     * Contraseña del usuario para el inicio de sesión.
-     */
+
     private String password;
 
     /**

@@ -14,42 +14,37 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class User {
 
-    /** Identificador único del usuario. */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** Nombre del usuario. */
     @Column(length = 100)
     private String name;
 
-    /** Apellido del usuario. */
     @Column(name = "last_name", length = 100)
     private String lastName;
 
-    /** Correo electrónico del usuario. */
     @Column(length = 255)
     private String email;
 
-    /** Fecha de registro del usuario. */
     @Column
     private String date;
 
-    /** Número de teléfono móvil del usuario. */
     @Column(length = 20)
     private String movil;
 
-    /** Contraseña del usuario. */
     @Column(length = 255)
     private String password;
 
-    /** Código postal del usuario. */
     @Column(name = "postal_code", length = 255)
     private String postalCode;
 
-    /** Indicador de si el usuario es administrador o no. */
     @Column
     private Boolean admin = false;
+    
+    @Column
+    private Boolean emailValidated = false;
 
     /**
      * Constructor por defecto de la clase User.
@@ -201,4 +196,21 @@ public class User {
         this.id = id;
     }
 
+    /**
+     * Indica si el email está validado.
+     * @return true si el usuario está validado, false en caso contrario.
+     */
+	public Boolean getEmailValidated() {
+		return emailValidated;
+	}
+
+	  /**
+     * Establece si el email está validado o no
+     * @param emailValidated true si el email está validado, false en caso contrario.
+     */
+	public void setEmailValidated(Boolean emailValidated) {
+		this.emailValidated = emailValidated;
+	}
+
+    
 }

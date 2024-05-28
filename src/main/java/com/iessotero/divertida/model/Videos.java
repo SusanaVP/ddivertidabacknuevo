@@ -16,28 +16,22 @@ import jakarta.persistence.Table;
 @Table(name = "videos")
 public class Videos {
 
-    /** Identificador único del video. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** Descripción del video. */
     @Column(length = 255)
     private String description;
 
-    /** Indica si el video es recomendado. */
     @Column
     private boolean recommended = false;
 
-    /** Título del video. */
     @Column(length = 255)
     private String title;
 
-    /** URL del video. */
     @Column(length = 255)
     private String url;
 
-    /** Categoría del video. */
     @ManyToOne()
     @JoinColumn(name = "category_id")
     private CategoriesVideo categoriesVideo;

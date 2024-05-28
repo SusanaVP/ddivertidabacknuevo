@@ -5,9 +5,6 @@ package com.iessotero.divertida.model;
  */
 public class JwtResponse {
 
-    /**
-     * Token JWT generado.
-     */
     private final String jwtToken;
 
     /**

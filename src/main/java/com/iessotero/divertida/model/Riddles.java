@@ -17,28 +17,16 @@ import jakarta.persistence.Table;
 @Table(name = "riddles")
 public class Riddles {
 
-	/**
-	 * Identificador único de la adivinanza.
-	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	/**
-	 * Descripción de la adivinanza.
-	 */
 	@Column(columnDefinition = "TEXT")
 	private String description;
 
-	/**
-	 * Título de la adivinanza.
-	 */
 	@Column(length = 255)
 	private String title;
 
-	/**
-	 * Categoría a la que pertenece la adivinanza.
-	 */
 	@ManyToOne()
 	@JoinColumn(name = "category_id")
 	private CategoriesRiddles categoriesRiddles;

@@ -16,29 +16,17 @@ import jakarta.persistence.Table;
 @Table(name = "favorites")
 public class Favorites {
 
-    /**
-     * Identificador único de favorito.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Usuario al que pertenece el favorito.
-     */
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    /**
-     * Identificador del contenido marcado como favorito.
-     */
     @Column(name = "content_id")
     private Long contentId;
 
-    /**
-     * Tipo de contenido marcado como favorito.
-     */
     @Column
     private String contentType;
 
