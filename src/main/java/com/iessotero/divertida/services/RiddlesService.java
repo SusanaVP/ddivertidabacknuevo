@@ -15,52 +15,63 @@ import com.iessotero.divertida.repository.IRiddlesRepository;
 @Service
 public class RiddlesService {
 
-    @Autowired
-    private IRiddlesRepository riddlesRepository;
+	@Autowired
+	private IRiddlesRepository riddlesRepository;
 
-    /**
-     * Obtiene la lista de todos los adivinanzas.
-     *
-     * @return una lista de objetos {@link Riddles}.
-     */
-    public List<Riddles> getAllRiddles() {
-        return riddlesRepository.findAll();
-    }
+	/**
+	 * Obtiene la lista de todos los adivinanzas.
+	 *
+	 * @return una lista de objetos {@link Riddles}.
+	 */
+	public List<Riddles> getAllRiddles() {
+		return riddlesRepository.findAll();
+	}
 
-    /**
-     * Obtiene la lista de adivinanzas por ID de categoría.
-     *
-     * @param categoryId el ID de la categoría.
-     * @return una lista de objetos {@link Riddles}.
-     */
-    public List<Riddles> getRiddlesById(Long categoryId) {
-        return riddlesRepository.findByCategoriesRiddleId(categoryId);
-    }
+	/**
+	 * Obtiene la lista de adivinanzas por ID de categoría.
+	 *
+	 * @param categoryId el ID de la categoría.
+	 * @return una lista de objetos {@link Riddles}.
+	 */
+	public List<Riddles> getRiddlesById(Long categoryId) {
+		return riddlesRepository.findByCategoriesRiddleId(categoryId);
+	}
 
-    /**
-     * Elimina una adivinanza dado su ID.
-     *
-     * @param idRiddle el ID de la adivinanza a eliminar.
-     */
-    public void deleteRiddle(Long idRiddle) {
-        riddlesRepository.deleteById(idRiddle);
-    }
+	/**
+	 * Elimina una adivinanza dado su ID.
+	 *
+	 * @param idRiddle el ID de la adivinanza a eliminar.
+	 */
+	public void deleteRiddle(Long idRiddle) {
+		riddlesRepository.deleteById(idRiddle);
+	}
 
-    /**
-     * Añade un nuevo adivinanza.
-     *
-     * @param riddle el objeto {@link Riddles} que se va a añadir.
-     */
-    public void addRiddle(Riddles riddle) {
-        riddlesRepository.save(riddle);
-    }
+	/**
+	 * Añade un nuevo adivinanza.
+	 *
+	 * @param riddle el objeto {@link Riddles} que se va a añadir.
+	 */
+	public void addRiddle(Riddles riddle) {
+		riddlesRepository.save(riddle);
+	}
 
-    /**
-     * Obtiene todas las categorías de las adivinanzas.
-     *
-     * @return una lista de objetos {@link CategoriesRiddles}.
-     */
-    public List<CategoriesRiddles> getRiddleCategories() {
-        return riddlesRepository.findAllCategoriesRiddles();
-    }
+	/**
+	 * Obtiene todas las categorías de las adivinanzas.
+	 *
+	 * @return una lista de objetos {@link CategoriesRiddles}.
+	 */
+	public List<CategoriesRiddles> getRiddleCategories() {
+		return riddlesRepository.findAllCategoriesRiddles();
+	}
+	
+	
+	/**
+	 * Modifica una adivinanza.
+	 *
+	 * @param riddle el objeto {@link Riddles} que se va a modificar.
+	 */
+	public void editRiddle(Riddles riddle) {
+		riddlesRepository.updateRiddle(riddle.getId(), riddle.getCategoriesRiddles().getId(), riddle.getTitle(),
+				riddle.getDescription(), riddle.getSolution());
+	}
 }

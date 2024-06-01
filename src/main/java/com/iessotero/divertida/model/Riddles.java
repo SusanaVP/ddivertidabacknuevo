@@ -26,6 +26,9 @@ public class Riddles {
 
 	@Column(length = 255)
 	private String title;
+	
+	@Column(length = 255)
+	private String solution;
 
 	@ManyToOne()
 	@JoinColumn(name = "category_id")
@@ -108,4 +111,24 @@ public class Riddles {
 	public void setCategoriesRiddles(CategoriesRiddles categoriesRiddles) {
 		this.categoriesRiddles = categoriesRiddles;
 	}
+
+	/**
+	 * Obtiene la solución de la adivinanza.
+	 *
+	 * @return La solución de la adivinanza.
+	 */
+	public String getSolution() {
+		return solution;
+	}
+
+	/**
+	 * Establece la solución de la adivinanza.
+	 *
+	 * @param solution es la solución de la adivinanza.
+	 */
+	public void setSolution(String solution) {
+		this.solution = solution;
+	}
+	
+	
 }

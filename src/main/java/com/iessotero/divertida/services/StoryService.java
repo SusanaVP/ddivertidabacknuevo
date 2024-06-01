@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iessotero.divertida.model.CategoriesStory;
+import com.iessotero.divertida.model.Riddles;
 import com.iessotero.divertida.model.Stories;
 import com.iessotero.divertida.repository.IStoryRepository;
 
@@ -63,5 +64,16 @@ public class StoryService {
     public List<CategoriesStory> getStoryCategories() {
         return storyRepository.findAllCategoriesStories();
     }
+    
+	
+	/**
+	 * Modifica un cuento.
+	 *
+	 * @param story el objeto {@link Riddles} que se va a modificar.
+	 */
+	public void editStory(Stories story) {
+		storyRepository.updateStory(story.getId(), story.getCategoriesStory().getId(), story.getTitle(),
+				story.getDescription());
+	}
 
 }
