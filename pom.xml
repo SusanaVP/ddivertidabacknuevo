@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.4</version>
+		<version>3.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.iessotero</groupId>
@@ -64,6 +64,10 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+			<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
 		<dependency>
 		    <groupId>jakarta.servlet</groupId>
 		    <artifactId>jakarta.servlet-api</artifactId>
@@ -96,8 +100,8 @@
 		<dependency>
 		    <groupId>jakarta.mail</groupId>
 		    <artifactId>jakarta.mail-api</artifactId>
-		    <version>2.1.3</version>
 		</dependency>
+	
 	</dependencies>
 
 	<build>

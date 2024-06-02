@@ -45,7 +45,7 @@ public class User {
     
     @Column
     private Boolean emailValidated = false;
-
+    
     /**
      * Constructor por defecto de la clase User.
      */

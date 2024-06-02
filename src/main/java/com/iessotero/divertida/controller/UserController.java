@@ -3,6 +3,7 @@ package com.iessotero.divertida.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,11 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iessotero.divertida.model.ConfirmationTokenEmail;
 import com.iessotero.divertida.model.JwtResponse;
 import com.iessotero.divertida.model.Login;
 import com.iessotero.divertida.model.User;
+import com.iessotero.divertida.services.EmailService;
+import com.iessotero.divertida.services.TokenMgmtService;
 import com.iessotero.divertida.services.UserService;
 
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 
 /**
@@ -40,21 +45,46 @@ public class UserController {
 	private UserDetailsService userDetailsService;
 
 	@Autowired
+	private TokenMgmtService tokenMgmtService;
+
+	@Autowired
 	UserService userService;
+
+	@Autowired
+	private EmailService emailService;
+
+	/** Dominio de la app */
+	@Value("${app.domain}")
+	private String domain;
 
 	/**
 	 * Endpoint para registrar un nuevo usuario.
 	 *
 	 * @param user el objeto {@link User} a registrar.
 	 * @return un ResponseEntity con el estado HTTP correspondiente.
+	 * @throws MessagingException
 	 */
 	@PostMapping("/register")
-	public ResponseEntity<String> saveUser(@RequestBody User user) {
+	public ResponseEntity<String> saveUser(@RequestBody User user) throws MessagingException {
 		User savedUser = userService.saveUser(user);
 		if (savedUser != null) {
+
+			// Guardar el token en la base de datos junto con el usuario
+			String token = tokenMgmtService.save(savedUser);
+
+			StringBuilder builder = new StringBuilder();
+			builder.append(
+					"Haga clic en el siguiente enlace para confirmar su cuenta de usuario en la Tienda Luz Fuego Destrucción: ");
+			builder.append(domain);
+			builder.append("/users/confirm?token=");
+			builder.append(token);
+
+			// Enviar correo de confirmacion
+			emailService.sendEmail(user.getEmail(), "Confirmación de cuenta de usuario", builder.toString());
+
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
-			 System.out.println("Error al registrarse");
+			System.out.println("Error al registrarse");
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -72,7 +102,7 @@ public class UserController {
 		if (userOptional.isPresent()) {
 			return ResponseEntity.ok().body(userOptional.get());
 		} else {
-			 System.out.println("Error al obteenr usuario por email backend");
+			System.out.println("Error al obteenr usuario por email backend");
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -142,4 +172,26 @@ public class UserController {
 	public UserDetails getUserDetails(@AuthenticationPrincipal UserDetails userDetails) {
 		return userDetails;
 	}
+
+	@GetMapping("/confirm")
+	public ResponseEntity<Void> confirmEmail(@RequestParam final String token) {
+
+		ConfirmationTokenEmail confirmationTokenEmail = tokenMgmtService.findByToken(token);
+
+		if (confirmationTokenEmail == null) {
+
+			return ResponseEntity.notFound().build();
+		}
+
+		User user = confirmationTokenEmail.getUser();
+		user.setEmailValidated(true);
+
+		userService.saveUser(user);
+
+		// Eliminar token de confirmacion
+		tokenMgmtService.deleteConfirmationToken(confirmationTokenEmail);
+
+		return ResponseEntity.ok().build();
+	}
+
 }
