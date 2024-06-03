@@ -12,32 +12,49 @@ import com.iessotero.divertida.repository.ConfirmationTokenEmailRepository;
 @Service
 public class TokenMgmtService {
 
-	/** Dependencia ConfirmationTokenRepositoryI */
 	@Autowired
-	private ConfirmationTokenEmailRepository tokenRepository;
+	private ConfirmationTokenEmailRepository confirmationTokenEmailRepository;
 
+	/**
+     * Genera un token único.
+     *
+     * @return El token generado.
+     */
 	public String generateToken() {
 		return UUID.randomUUID().toString();
 	}
 
+	/**
+     * Guarda un token de confirmación de correo electrónico asociado a un usuario.
+     *
+     * @param user El usuario asociado al token.
+     * @return El token generado.
+     */
 	public String save(User user) {
-		// Generar token de confirmacion
 		String token = generateToken();
-
-		// Guardar
-		tokenRepository.save(new ConfirmationTokenEmail(user, token));
+		confirmationTokenEmailRepository.save(new ConfirmationTokenEmail(user, token));
 
 		return token;
 	}
 
+	 /**
+     * Busca un token de confirmación de correo electrónico por su valor.
+     *
+     * @param token El valor del token a buscar.
+     * @return El token de confirmación encontrado.
+     */
 	public ConfirmationTokenEmail findByToken(String token) {
 
-		return tokenRepository.findByToken(token);
+		return confirmationTokenEmailRepository.findByToken(token);
 	}
 
-	public void deleteConfirmationToken(ConfirmationTokenEmail confirmationToken) {
+	/**
+     * Elimina un token de confirmación de correo electrónico.
+     *
+     * @param confirmationTokenEmail El token de confirmación a eliminar.
+     */
+	public void deleteConfirmationToken(ConfirmationTokenEmail confirmationTokenEmail) {
 
-		// Eliminar por Id
-		tokenRepository.deleteById(confirmationToken.getConfirmId());
+		confirmationTokenEmailRepository.deleteById(confirmationTokenEmail.getId());
 	}
 }

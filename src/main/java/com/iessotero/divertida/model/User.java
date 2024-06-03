@@ -41,10 +41,10 @@ public class User {
     private String postalCode;
 
     @Column
-    private Boolean admin = false;
+    private boolean admin;
     
     @Column
-    private Boolean emailValidated = false;
+    private boolean emailValidated;
     
     /**
      * Constructor por defecto de la clase User.
@@ -168,7 +168,7 @@ public class User {
      * Indica si el usuario es administrador.
      * @return true si el usuario es administrador, false en caso contrario.
      */
-    public Boolean getAdmin() {
+    public boolean getAdmin() {
         return admin;
     }
 
@@ -176,7 +176,7 @@ public class User {
      * Establece si el usuario es administrador.
      * @param admin true si el usuario es administrador, false en caso contrario.
      */
-    public void setAdmin(Boolean admin) {
+    public void setAdmin(boolean admin) {
         this.admin = admin;
     }
 
@@ -200,7 +200,7 @@ public class User {
      * Indica si el email está validado.
      * @return true si el usuario está validado, false en caso contrario.
      */
-	public Boolean getEmailValidated() {
+	public boolean getEmailValidated() {
 		return emailValidated;
 	}
 
@@ -208,7 +208,7 @@ public class User {
      * Establece si el email está validado o no
      * @param emailValidated true si el email está validado, false en caso contrario.
      */
-	public void setEmailValidated(Boolean emailValidated) {
+	public void setEmailValidated(boolean emailValidated) {
 		this.emailValidated = emailValidated;
 	}
 

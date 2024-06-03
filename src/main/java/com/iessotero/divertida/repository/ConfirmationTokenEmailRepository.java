@@ -12,7 +12,7 @@ public interface ConfirmationTokenEmailRepository extends JpaRepository<Confirma
 	 * Buscar por token
 	 * 
 	 * @param token
-	 * @return ConfirmationToken
+	 * @return ConfirmationTokenEmail
 	 */
 	public ConfirmationTokenEmail findByToken(String token);
 }

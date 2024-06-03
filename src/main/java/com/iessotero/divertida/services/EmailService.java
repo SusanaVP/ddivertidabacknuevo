@@ -29,20 +29,20 @@ public class EmailService {
 	@Value("${mail.smtp.ssl.enable}")
 	private boolean sslEnable;
 
-	/** SMTP autenticacion */
+	/** SMTP autentication */
 	@Value("${mail.smtp.auth}")
 	private boolean auth;
 
-	/** SMTP usuario */
+	/** SMTP user */
 	@Value("${mail.smtp.user}")
 	private String username;
 
-	/** SMTP contrasenna */
+	/** SMTP password */
 	@Value("${mail.smtp.password}")
 	private String password;
 
 	/**
-	 * Crear sesion para envio de email
+	 * Crear sesion para enviar el email para confirmación
 	 * 
 	 * @return Session
 	 */
@@ -65,7 +65,7 @@ public class EmailService {
 	}
 
 	/**
-	 * Enviar email
+	 * Enviar email de confirmación
 	 * 
 	 * @param to
 	 * @param subject

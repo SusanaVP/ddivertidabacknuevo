@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +59,8 @@ public class UserController {
 	private String domain;
 
 	/**
-	 * Endpoint para registrar un nuevo usuario.
+	 * Endpoint para registrar un nuevo usuario y mandar el email para la
+	 * confirmación.
 	 *
 	 * @param user el objeto {@link User} a registrar.
 	 * @return un ResponseEntity con el estado HTTP correspondiente.
@@ -69,17 +71,15 @@ public class UserController {
 		User savedUser = userService.saveUser(user);
 		if (savedUser != null) {
 
-			// Guardar el token en la base de datos junto con el usuario
 			String token = tokenMgmtService.save(savedUser);
 
 			StringBuilder builder = new StringBuilder();
 			builder.append(
-					"Haga clic en el siguiente enlace para confirmar su cuenta de usuario en la Tienda Luz Fuego Destrucción: ");
+					"Haga clic en el siguiente enlace para confirmar su cuenta de usuario en la web D de Divertida: ");
 			builder.append(domain);
-			builder.append("/users/confirm?token=");
+			builder.append("/user/confirm?token=");
 			builder.append(token);
 
-			// Enviar correo de confirmacion
 			emailService.sendEmail(user.getEmail(), "Confirmación de cuenta de usuario", builder.toString());
 
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -102,7 +102,6 @@ public class UserController {
 		if (userOptional.isPresent()) {
 			return ResponseEntity.ok().body(userOptional.get());
 		} else {
-			System.out.println("Error al obteenr usuario por email backend");
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -173,8 +172,16 @@ public class UserController {
 		return userDetails;
 	}
 
+	/**
+	 * Maneja la confirmación del correo electrónico de un usuario usando un token de confirmación.
+	 *
+	 * @param token el token de confirmación proporcionado por el usuario
+	 * @return un ResponseEntity<Void> que indica el resultado de la operación:
+	 *         - 200 OK si el correo electrónico fue confirmado exitosamente
+	 *         - 404 Not Found si el token es inválido o no se encuentra
+	 */
 	@GetMapping("/confirm")
-	public ResponseEntity<Void> confirmEmail(@RequestParam final String token) {
+	public ResponseEntity<Void> confirmEmail(@RequestParam final String token,Model model) {
 
 		ConfirmationTokenEmail confirmationTokenEmail = tokenMgmtService.findByToken(token);
 
@@ -188,6 +195,7 @@ public class UserController {
 
 		userService.saveUser(user);
 
+		 model.addAttribute("message", "Su cuenta ha sido confirmada exitosamente.Ya formas parte de la comunidad D de Divertida");
 		// Eliminar token de confirmacion
 		tokenMgmtService.deleteConfirmationToken(confirmationTokenEmail);
 

@@ -1,7 +1,5 @@
 package com.iessotero.divertida.model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,21 +7,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "confirmation_token_email")
 public class ConfirmationTokenEmail {
 
-	/** Identificador (PK) */
 	@Id
-	@Column(name = "C_CONFIRM_ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long confirmId;
+	private Long id;
 
-	/** Token */
 	@Column(name = "C_TOKEN", length = 100)
 	private String token;
 
-	/** Usuario */
 	@OneToOne(targetEntity = User.class)
 	@JoinColumn(nullable = false, name = "user_id")
 	private User user;
@@ -39,29 +36,66 @@ public class ConfirmationTokenEmail {
 		this.token = token;
 	}
 
-	public Long getConfirmId() {
-		return confirmId;
+	/**
+	 * Constructor
+	 * 
+	 */
+	public ConfirmationTokenEmail() {
+
 	}
 
-	public void setConfirmId(Long confirmId) {
-		this.confirmId = confirmId;
+	/**
+	 * Obtiene el ID de confirmación.
+	 *
+	 * @return el ID de confirmación
+	 */
+	public Long getId() {
+		return id;
 	}
 
+	/**
+	 * Establece el ID de confirmación.
+	 *
+	 * @param id el nuevo ID de confirmación
+	 */
+	public void setConfirmId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * Obtiene el token.
+	 *
+	 * @return el token
+	 */
 	public String getToken() {
 		return token;
 	}
 
+	/**
+	 * Establece el token.
+	 *
+	 * @param token el nuevo token
+	 */
 	public void setToken(String token) {
 		this.token = token;
 	}
 
+	/**
+	 * Obtiene el usuario asociado.
+	 *
+	 * @return el usuario asociado
+	 */
 	public User getUser() {
 		return user;
 	}
 
+	/**
+	 * Establece el usuario asociado.
+	 *
+	 * @param user el nuevo usuario asociado
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 }
