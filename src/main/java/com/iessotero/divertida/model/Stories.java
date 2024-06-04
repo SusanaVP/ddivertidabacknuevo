@@ -16,93 +16,122 @@ import jakarta.persistence.Table;
 @Table(name = "stories")
 public class Stories {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(columnDefinition = "TEXT")
-    private String description;
+	@Column(columnDefinition = "TEXT")
+	private String description;
 
-    @Column(length = 255)
-    private String title;
+	@Column(length = 255)
+	private String title;
 
-    @ManyToOne()
-    @JoinColumn(name = "category_id")
-    private CategoriesStory categoriesStory;
+	@ManyToOne()
+	@JoinColumn(name = "category_id")
+	private CategoriesStory categoriesStory;
 
-    /**
-     * Constructor por defecto de la clase Stories.
-     */
-    public Stories() {
-    }
+	@Column(columnDefinition = "TEXT")
+	private String image;
 
-    /**
-     * Obtiene la descripción de la historia.
-     * @return La descripción de la historia.
-     */
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * Constructor por defecto de la clase Stories.
+	 */
+	public Stories() {
+	}
 
-    /**
-     * Establece la descripción de la historia.
-     * @param description La descripción de la historia.
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	/**
+	 * Obtiene la descripción de la historia.
+	 * 
+	 * @return La descripción de la historia.
+	 */
+	public String getDescription() {
+		return description;
+	}
 
-    /**
-     * Obtiene el título de la historia.
-     * @return El título de la historia.
-     */
-    public String getTitle() {
-        return title;
-    }
+	/**
+	 * Establece la descripción de la historia.
+	 * 
+	 * @param description La descripción de la historia.
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    /**
-     * Establece el título de la historia.
-     * @param title El título de la historia.
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	/**
+	 * Obtiene el título de la historia.
+	 * 
+	 * @return El título de la historia.
+	 */
+	public String getTitle() {
+		return title;
+	}
 
-    /**
-     * Obtiene el identificador único de la historia.
-     * @return El identificador único de la historia.
-     */
-    public Long getId() {
-        return id;
-    }
+	/**
+	 * Establece el título de la historia.
+	 * 
+	 * @param title El título de la historia.
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    /**
-     * Establece el identificador único de la historia.
-     * @param id El identificador único de la historia.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+	/**
+	 * Obtiene el identificador único de la historia.
+	 * 
+	 * @return El identificador único de la historia.
+	 */
+	public Long getId() {
+		return id;
+	}
 
-    /**
-     * Obtiene la categoría a la que pertenece la historia.
-     * @return La categoría a la que pertenece la historia.
-     */
-    public CategoriesStory getCategoriesStory() {
-        return categoriesStory;
-    }
+	/**
+	 * Establece el identificador único de la historia.
+	 * 
+	 * @param id El identificador único de la historia.
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    /**
-     * Establece la categoría a la que pertenece la historia.
-     * @param categoriesStory La categoría a la que pertenece la historia.
-     */
-    public void setCategoriesStory(CategoriesStory categoriesStory) {
-        this.categoriesStory = categoriesStory;
-    }
+	/**
+	 * Obtiene la categoría a la que pertenece la historia.
+	 * 
+	 * @return La categoría a la que pertenece la historia.
+	 */
+	public CategoriesStory getCategoriesStory() {
+		return categoriesStory;
+	}
 
-    @Override
-    public String toString() {
-        return "Stories [id=" + id + ", description=" + description + ", title=" + title + "]";
-    }
+	/**
+	 * Establece la categoría a la que pertenece la historia.
+	 * 
+	 * @param categoriesStory La categoría a la que pertenece la historia.
+	 */
+	public void setCategoriesStory(CategoriesStory categoriesStory) {
+		this.categoriesStory = categoriesStory;
+	}
+
+	/**
+	 * Obtiene la URL de la imagen asociada al cuento.
+	 * 
+	 * @return La URL de la imagen del cuento.
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * Establece la URL de la imagen asociada al cuento.
+	 * 
+	 * @param image La nueva URL de la imagen del cuento.
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	@Override
+	public String toString() {
+		return "Stories [id=" + id + ", description=" + description + ", title=" + title + "]";
+	}
 
 }

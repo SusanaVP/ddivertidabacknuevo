@@ -1,5 +1,6 @@
 package com.iessotero.divertida.controller;
 
+import java.net.URI;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,9 @@ public class UserController {
 
 			StringBuilder builder = new StringBuilder();
 			builder.append(
-					"Haga clic en el siguiente enlace para confirmar su cuenta de usuario en la web D de Divertida: ");
+					"D de Divertida te da la Bienvenida!!!\n");
+			builder.append(
+					"Haga clic en el siguiente enlace para confirmar tu cuenta de usuario en la web D de Divertida:\n ");
 			builder.append(domain);
 			builder.append("/user/confirm?token=");
 			builder.append(token);
@@ -195,11 +198,10 @@ public class UserController {
 
 		userService.saveUser(user);
 
-		 model.addAttribute("message", "Su cuenta ha sido confirmada exitosamente.Ya formas parte de la comunidad D de Divertida");
 		// Eliminar token de confirmacion
 		tokenMgmtService.deleteConfirmationToken(confirmationTokenEmail);
 
-		return ResponseEntity.ok().build();
+		return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/confirmation.html")).build();
 	}
 
 }
