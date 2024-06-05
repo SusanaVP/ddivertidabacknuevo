@@ -189,7 +189,7 @@ public class UserController {
 	 *         Found si el token es inválido o no se encuentra
 	 */
 	@GetMapping("/confirm")
-	public ResponseEntity<Void> confirmEmail(@RequestParam final String token, Model model) {
+	public ResponseEntity<Void> confirmEmail(@RequestParam final String token) {
 
 		ConfirmationTokenEmail confirmationTokenEmail = tokenMgmtService.findByToken(token);
 
@@ -206,7 +206,7 @@ public class UserController {
 		// Eliminar token de confirmacion
 		tokenMgmtService.deleteConfirmationToken(confirmationTokenEmail);
 
-		return ResponseEntity.status(HttpStatus.FOUND).build();
+		return ResponseEntity.ok().build();
 	}
 
 }
