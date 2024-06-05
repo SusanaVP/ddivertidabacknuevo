@@ -206,7 +206,7 @@ public class UserController {
 		// Eliminar token de confirmacion
 		tokenMgmtService.deleteConfirmationToken(confirmationTokenEmail);
 
-		return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/confirmation.html")).build();
+		return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/confirmation")).build();
 	}
 
 }
