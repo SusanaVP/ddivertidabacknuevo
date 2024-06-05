@@ -22,8 +22,8 @@ public class UserService {
     @Autowired
     private IUserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     /**
      * Guarda un nuevo usuario en la base de datos.
@@ -32,7 +32,7 @@ public class UserService {
      * @return el usuario guardado.
      */
     public User saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+       // user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

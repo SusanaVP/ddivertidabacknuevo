@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,6 +56,9 @@ public class UserController {
 	@Autowired
 	private EmailService emailService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	/** Dominio de la app */
 	@Value("${app.domain}")
 	private String domain;
@@ -69,14 +73,14 @@ public class UserController {
 	 */
 	@PostMapping("/register")
 	public ResponseEntity<String> saveUser(@RequestBody User user) throws MessagingException {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		User savedUser = userService.saveUser(user);
 		if (savedUser != null) {
 
 			String token = tokenMgmtService.save(savedUser);
 
 			StringBuilder builder = new StringBuilder();
-			builder.append(
-					"D de Divertida te da la Bienvenida!!!\n");
+			builder.append("D de Divertida te da la Bienvenida!!!\n");
 			builder.append(
 					"Haga clic en el siguiente enlace para confirmar tu cuenta de usuario en la web D de Divertida:\n ");
 			builder.append(domain);
@@ -176,15 +180,16 @@ public class UserController {
 	}
 
 	/**
-	 * Maneja la confirmación del correo electrónico de un usuario usando un token de confirmación.
+	 * Maneja la confirmación del correo electrónico de un usuario usando un token
+	 * de confirmación.
 	 *
 	 * @param token el token de confirmación proporcionado por el usuario
-	 * @return un ResponseEntity<Void> que indica el resultado de la operación:
-	 *         - 200 OK si el correo electrónico fue confirmado exitosamente
-	 *         - 404 Not Found si el token es inválido o no se encuentra
+	 * @return un ResponseEntity<Void> que indica el resultado de la operación: -
+	 *         200 OK si el correo electrónico fue confirmado exitosamente - 404 Not
+	 *         Found si el token es inválido o no se encuentra
 	 */
 	@GetMapping("/confirm")
-	public ResponseEntity<Void> confirmEmail(@RequestParam final String token,Model model) {
+	public ResponseEntity<Void> confirmEmail(@RequestParam final String token, Model model) {
 
 		ConfirmationTokenEmail confirmationTokenEmail = tokenMgmtService.findByToken(token);
 
