@@ -84,7 +84,7 @@ public class UserController {
 			builder.append(
 					"Haga clic en el siguiente enlace para confirmar tu cuenta de usuario en la web D de Divertida:\n ");
 			builder.append(domain);
-			builder.append("/user/confirm?token=");
+			builder.append("/email/confirmation?token=");
 			builder.append(token);
 
 			emailService.sendEmail(user.getEmail(), "Confirmación de cuenta de usuario", builder.toString());
@@ -178,35 +178,4 @@ public class UserController {
 	public UserDetails getUserDetails(@AuthenticationPrincipal UserDetails userDetails) {
 		return userDetails;
 	}
-
-	/**
-	 * Maneja la confirmación del correo electrónico de un usuario usando un token
-	 * de confirmación.
-	 *
-	 * @param token el token de confirmación proporcionado por el usuario
-	 * @return un ResponseEntity<Void> que indica el resultado de la operación: -
-	 *         200 OK si el correo electrónico fue confirmado exitosamente - 404 Not
-	 *         Found si el token es inválido o no se encuentra
-	 */
-	@GetMapping("/confirm")
-	public ResponseEntity<Void> confirmEmail(@RequestParam final String token) {
-
-		ConfirmationTokenEmail confirmationTokenEmail = tokenMgmtService.findByToken(token);
-
-		if (confirmationTokenEmail == null) {
-
-			return ResponseEntity.notFound().build();
-		}
-
-		User user = confirmationTokenEmail.getUser();
-		user.setEmailValidated(true);
-
-		userService.saveUser(user);
-
-		// Eliminar token de confirmacion
-		tokenMgmtService.deleteConfirmationToken(confirmationTokenEmail);
-
-		return ResponseEntity.ok().build();
-	}
-
 }
