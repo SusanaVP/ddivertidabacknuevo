@@ -90,8 +90,8 @@ public class BlogController {
 			this.blogService.likesPlus(idBlog);
 			return new ResponseEntity<>("Likes incrementados correctamente", HttpStatus.OK);
 		} catch (Exception e) {
-			   System.out.println("Error al incrementar los likes");
-			    e.printStackTrace();
+			System.out.println("Error al incrementar los likes");
+			e.printStackTrace();
 			return new ResponseEntity<>("Error al incrementar los likes", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -112,8 +112,8 @@ public class BlogController {
 					idUser, blogEntryData.getImage(), blogEntryData.getValidated());
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
-			   System.out.println("Error al añadir un nuevo blog:");
-			    e.printStackTrace();
+			System.out.println("Error al añadir un nuevo blog:");
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -132,8 +132,8 @@ public class BlogController {
 			this.blogService.deleteBlog(idBlog);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
-			   System.out.println("Error al eliminar el blog:");
-			    e.printStackTrace();
+			System.out.println("Error al eliminar el blog:");
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

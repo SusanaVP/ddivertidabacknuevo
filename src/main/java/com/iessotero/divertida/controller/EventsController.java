@@ -23,52 +23,54 @@ import com.iessotero.divertida.services.EventsService;
 @RequestMapping("/events")
 public class EventsController {
 
-    @Autowired
-    EventsService eventsService;
+	@Autowired
+	EventsService eventsService;
 
-    /**
-     * Obtiene una lista de todos los eventos.
-     *
-     * @return una lista de objetos {@link Events}.
-     */
-    @GetMapping()
-    public List<Events> getEvents() {
-        return eventsService.getAllEvents();
-    }
+	/**
+	 * Obtiene una lista de todos los eventos.
+	 *
+	 * @return una lista de objetos {@link Events}.
+	 */
+	@GetMapping()
+	public List<Events> getEvents() {
+		return eventsService.getAllEvents();
+	}
 
-    /**
-     * Añade un nuevo evento. Este método puede ser accedido por cualquier usuario autenticado.
-     *
-     * @param event los datos del evento a añadir.
-     * @return una respuesta con el estado de la operación.
-     */
+	/**
+	 * Añade un nuevo evento. Este método puede ser accedido por cualquier usuario
+	 * autenticado.
+	 *
+	 * @param event los datos del evento a añadir.
+	 * @return una respuesta con el estado de la operación.
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/addEvent")
-    public ResponseEntity<String> addEvent(@RequestBody Events event) {
-        try {
-            this.eventsService.addEvent(event);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-        	  System.out.println("Error al añadir un evento");
-			    e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	@PostMapping("/addEvent")
+	public ResponseEntity<String> addEvent(@RequestBody Events event) {
+		try {
+			this.eventsService.addEvent(event);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println("Error al añadir un evento");
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-    /**
-     * Elimina un evento dado su ID. Este método solo puede ser accedido por administradores.
-     *
-     * @param idEvent el ID del evento a eliminar.
-     * @return una respuesta con el estado de la operación.
-     */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/deleteEvent/{idEvent}")
-    public ResponseEntity<String> deleteEvent(@PathVariable Long idEvent) {
-        try {
-            this.eventsService.deleteEvent(idEvent);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	/**
+	 * Elimina un evento dado su ID. Este método solo puede ser accedido por
+	 * administradores.
+	 *
+	 * @param idEvent el ID del evento a eliminar.
+	 * @return una respuesta con el estado de la operación.
+	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/deleteEvent/{idEvent}")
+	public ResponseEntity<String> deleteEvent(@PathVariable Long idEvent) {
+		try {
+			this.eventsService.deleteEvent(idEvent);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

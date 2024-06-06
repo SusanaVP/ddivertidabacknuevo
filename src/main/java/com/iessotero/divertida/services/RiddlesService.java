@@ -63,8 +63,7 @@ public class RiddlesService {
 	public List<CategoriesRiddles> getRiddleCategories() {
 		return riddlesRepository.findAllCategoriesRiddles();
 	}
-	
-	
+
 	/**
 	 * Modifica una adivinanza.
 	 *

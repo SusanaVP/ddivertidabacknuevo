@@ -9,6 +9,11 @@ import com.iessotero.divertida.model.ConfirmationTokenEmail;
 import com.iessotero.divertida.model.User;
 import com.iessotero.divertida.repository.ConfirmationTokenEmailRepository;
 
+/**
+ * Servicio para la gestión de tokens de confirmación de correo electrónico.
+ * Este servicio proporciona métodos para generar, guardar, buscar y eliminar
+ * tokens de confirmación asociados a usuarios registrados en la aplicación.
+ */
 @Service
 public class TokenMgmtService {
 
@@ -16,20 +21,20 @@ public class TokenMgmtService {
 	private ConfirmationTokenEmailRepository confirmationTokenEmailRepository;
 
 	/**
-     * Genera un token único.
-     *
-     * @return El token generado.
-     */
+	 * Genera un token único.
+	 *
+	 * @return El token generado.
+	 */
 	public String generateToken() {
 		return UUID.randomUUID().toString();
 	}
 
 	/**
-     * Guarda un token de confirmación de correo electrónico asociado a un usuario.
-     *
-     * @param user El usuario asociado al token.
-     * @return El token generado.
-     */
+	 * Guarda un token de confirmación de correo electrónico asociado a un usuario.
+	 *
+	 * @param user El usuario asociado al token.
+	 * @return El token generado.
+	 */
 	public String save(User user) {
 		String token = generateToken();
 		confirmationTokenEmailRepository.save(new ConfirmationTokenEmail(user, token));
@@ -37,22 +42,22 @@ public class TokenMgmtService {
 		return token;
 	}
 
-	 /**
-     * Busca un token de confirmación de correo electrónico por su valor.
-     *
-     * @param token El valor del token a buscar.
-     * @return El token de confirmación encontrado.
-     */
+	/**
+	 * Busca un token de confirmación de correo electrónico por su valor.
+	 *
+	 * @param token El valor del token a buscar.
+	 * @return El token de confirmación encontrado.
+	 */
 	public ConfirmationTokenEmail findByToken(String token) {
 
 		return confirmationTokenEmailRepository.findByToken(token);
 	}
 
 	/**
-     * Elimina un token de confirmación de correo electrónico.
-     *
-     * @param confirmationTokenEmail El token de confirmación a eliminar.
-     */
+	 * Elimina un token de confirmación de correo electrónico.
+	 *
+	 * @param confirmationTokenEmail El token de confirmación a eliminar.
+	 */
 	public void deleteConfirmationToken(ConfirmationTokenEmail confirmationTokenEmail) {
 
 		confirmationTokenEmailRepository.deleteById(confirmationTokenEmail.getId());

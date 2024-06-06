@@ -9,16 +9,17 @@ import org.springframework.stereotype.Repository;
 import com.iessotero.divertida.model.Events;
 
 /**
- * Repositorio para gestionar operaciones CRUD y consultas personalizadas para la entidad {@link Events}.
+ * Repositorio para gestionar operaciones CRUD y consultas personalizadas para
+ * la entidad {@link Events}.
  */
 @Repository
 public interface IEventsRepository extends JpaRepository<Events, Long> {
 
-    /**
-     * Obtiene una lista de todos los eventos.
-     *
-     * @return una lista de objetos {@link Events}.
-     */
-    @Query("SELECT e FROM Events e")
-    List<Events> findAllEvents();
+	/**
+	 * Obtiene una lista de todos los eventos.
+	 *
+	 * @return una lista de objetos {@link Events}.
+	 */
+	@Query("SELECT e FROM Events e")
+	List<Events> findAllEvents();
 }

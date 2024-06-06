@@ -14,52 +14,52 @@ import jakarta.persistence.Table;
 @Table(name = "categories_video")
 public class CategoriesVideo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(length = 20)
-    private String nameCategory;
-    
-    /**
-     * Constructor vacío de la clase CategoriesVideo.
-     */
-    public CategoriesVideo() {
-    }
+	@Column(length = 20)
+	private String nameCategory;
 
-    /**
-     * Obtiene el ID de la categoría de videos.
-     * 
-     * @return El ID de la categoría de videos.
-     */
-    public Long getId() {
-        return id;
-    }
+	/**
+	 * Constructor vacío de la clase CategoriesVideo.
+	 */
+	public CategoriesVideo() {
+	}
 
-    /**
-     * Establece el ID de la categoría de videos.
-     * 
-     * @param id El nuevo ID de la categoría de videos.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+	/**
+	 * Obtiene el ID de la categoría de videos.
+	 * 
+	 * @return El ID de la categoría de videos.
+	 */
+	public Long getId() {
+		return id;
+	}
 
-    /**
-     * Obtiene el nombre de la categoría de videos.
-     * 
-     * @return El nombre de la categoría de videos.
-     */
-    public String getNameCategory() {
-        return nameCategory;
-    }
+	/**
+	 * Establece el ID de la categoría de videos.
+	 * 
+	 * @param id El nuevo ID de la categoría de videos.
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    /**
-     * Establece el nombre de la categoría de videos.
-     * 
-     * @param nameCategory El nuevo nombre de la categoría de videos.
-     */
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
-    }
+	/**
+	 * Obtiene el nombre de la categoría de videos.
+	 * 
+	 * @return El nombre de la categoría de videos.
+	 */
+	public String getNameCategory() {
+		return nameCategory;
+	}
+
+	/**
+	 * Establece el nombre de la categoría de videos.
+	 * 
+	 * @param nameCategory El nuevo nombre de la categoría de videos.
+	 */
+	public void setNameCategory(String nameCategory) {
+		this.nameCategory = nameCategory;
+	}
 }

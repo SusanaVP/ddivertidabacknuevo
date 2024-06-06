@@ -14,33 +14,33 @@ import com.iessotero.divertida.repository.IEventsRepository;
 @Service
 public class EventsService {
 
-    @Autowired
-    private IEventsRepository eventsRepository;
+	@Autowired
+	private IEventsRepository eventsRepository;
 
-    /**
-     * Obtiene una lista de todos los eventos.
-     *
-     * @return una lista de objetos {@link Events}.
-     */
-    public List<Events> getAllEvents() {
-        return (List<Events>) eventsRepository.findAllEvents();
-    }
+	/**
+	 * Obtiene una lista de todos los eventos.
+	 *
+	 * @return una lista de objetos {@link Events}.
+	 */
+	public List<Events> getAllEvents() {
+		return (List<Events>) eventsRepository.findAllEvents();
+	}
 
-    /**
-     * Añade un nuevo evento.
-     *
-     * @param event los datos del evento a añadir.
-     */
-    public void addEvent(Events event) {
-        eventsRepository.save(event);
-    }
+	/**
+	 * Añade un nuevo evento.
+	 *
+	 * @param event los datos del evento a añadir.
+	 */
+	public void addEvent(Events event) {
+		eventsRepository.save(event);
+	}
 
-    /**
-     * Elimina un evento dado su ID.
-     *
-     * @param idEvent el ID del evento a eliminar.
-     */
-    public void deleteEvent(Long idEvent) {
-        eventsRepository.deleteById(idEvent);
-    }
+	/**
+	 * Elimina un evento dado su ID.
+	 *
+	 * @param idEvent el ID del evento a eliminar.
+	 */
+	public void deleteEvent(Long idEvent) {
+		eventsRepository.deleteById(idEvent);
+	}
 }

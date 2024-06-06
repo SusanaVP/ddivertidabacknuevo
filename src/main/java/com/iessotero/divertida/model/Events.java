@@ -16,241 +16,241 @@ import java.util.Date;
 @Table(name = "events")
 public class Events {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(length = 255)
-    private String title;
+	@Column(length = 255)
+	private String title;
 
-    @Column(columnDefinition = "TEXT")
-    private String description;
+	@Column(columnDefinition = "TEXT")
+	private String description;
 
-    @Column(columnDefinition = "TEXT")
-    private String image;
+	@Column(columnDefinition = "TEXT")
+	private String image;
 
-    @Column(length = 255)
-    private String info;
+	@Column(length = 255)
+	private String info;
 
-    @Column(length = 255)
-    private String url;
+	@Column(length = 255)
+	private String url;
 
-    @Column
-    private Date date;
-    
-    @Column
-    private Float latitude;
+	@Column
+	private Date date;
 
-    @Column
-    private Float longitude;
-    
-    @Column
-    private String town;
-    
-    @Column
-    private String city;
+	@Column
+	private Float latitude;
 
-    /**
-     * Constructor vacío de la clase Events.
-     */
-    public Events() {
-    }
+	@Column
+	private Float longitude;
 
-    /**
-     * Obtiene el título del evento.
-     * 
-     * @return El título del evento.
-     */
-    public String getTitle() {
-        return title;
-    }
+	@Column
+	private String town;
 
-    /**
-     * Establece el título del evento.
-     * 
-     * @param title El nuevo título del evento.
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	@Column
+	private String city;
 
-    /**
-     * Obtiene la descripción del evento.
-     * 
-     * @return La descripción del evento.
-     */
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * Constructor vacío de la clase Events.
+	 */
+	public Events() {
+	}
 
-    /**
-     * Establece la descripción del evento.
-     * 
-     * @param description La nueva descripción del evento.
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	/**
+	 * Obtiene el título del evento.
+	 * 
+	 * @return El título del evento.
+	 */
+	public String getTitle() {
+		return title;
+	}
 
-    /**
-     * Obtiene la imagen del evento.
-     * 
-     * @return La imagen del evento.
-     */
-    public String getImage() {
-        return image;
-    }
+	/**
+	 * Establece el título del evento.
+	 * 
+	 * @param title El nuevo título del evento.
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    /**
-     * Establece la imagen del evento.
-     * 
-     * @param image La nueva imagen del evento.
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
+	/**
+	 * Obtiene la descripción del evento.
+	 * 
+	 * @return La descripción del evento.
+	 */
+	public String getDescription() {
+		return description;
+	}
 
-    /**
-     * Obtiene la información adicional del evento.
-     * 
-     * @return La información adicional del evento.
-     */
-    public String getInfo() {
-        return info;
-    }
+	/**
+	 * Establece la descripción del evento.
+	 * 
+	 * @param description La nueva descripción del evento.
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    /**
-     * Establece la información adicional del evento.
-     * 
-     * @param info La nueva información adicional del evento.
-     */
-    public void setInfo(String info) {
-        this.info = info;
-    }
+	/**
+	 * Obtiene la imagen del evento.
+	 * 
+	 * @return La imagen del evento.
+	 */
+	public String getImage() {
+		return image;
+	}
 
-    /**
-     * Obtiene la URL relacionada con el evento.
-     * 
-     * @return La URL relacionada con el evento.
-     */
-    public String getUrl() {
-        return url;
-    }
+	/**
+	 * Establece la imagen del evento.
+	 * 
+	 * @param image La nueva imagen del evento.
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
 
-    /**
-     * Establece la URL relacionada con el evento.
-     * 
-     * @param url La nueva URL relacionada con el evento.
-     */
-    public void setUrl(String url) {
-        this.url = url;
-    }
+	/**
+	 * Obtiene la información adicional del evento.
+	 * 
+	 * @return La información adicional del evento.
+	 */
+	public String getInfo() {
+		return info;
+	}
 
-    /**
-     * Obtiene la fecha del evento.
-     * 
-     * @return La fecha del evento.
-     */
-    public Date getDate() {
-        return date;
-    }
+	/**
+	 * Establece la información adicional del evento.
+	 * 
+	 * @param info La nueva información adicional del evento.
+	 */
+	public void setInfo(String info) {
+		this.info = info;
+	}
 
-    /**
-     * Establece la fecha del evento.
-     * 
-     * @param date La nueva fecha del evento.
-     */
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	/**
+	 * Obtiene la URL relacionada con el evento.
+	 * 
+	 * @return La URL relacionada con el evento.
+	 */
+	public String getUrl() {
+		return url;
+	}
 
-    /**
-     * Obtiene la latitud del evento.
-     * 
-     * @return La latitud del evento.
-     */
-    public Float getLatitude() {
-        return latitude;
-    }
+	/**
+	 * Establece la URL relacionada con el evento.
+	 * 
+	 * @param url La nueva URL relacionada con el evento.
+	 */
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
-    /**
-     * Establece la latitud del evento.
-     * 
-     * @param latitude La nueva latitud del evento.
-     */
-    public void setLatitude(Float latitude) {
-        this.latitude = latitude;
-    }
+	/**
+	 * Obtiene la fecha del evento.
+	 * 
+	 * @return La fecha del evento.
+	 */
+	public Date getDate() {
+		return date;
+	}
 
-    /**
-     * Obtiene la longitud del evento.
-     * 
-     * @return La longitud del evento.
-     */
-    public Float getLongitude() {
-        return longitude;
-    }
+	/**
+	 * Establece la fecha del evento.
+	 * 
+	 * @param date La nueva fecha del evento.
+	 */
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    /**
-     * Establece la longitud del evento.
-     * 
-     * @param longitude La nueva longitud del evento.
-     */
-    public void setLongitude(Float longitude) {
-        this.longitude = longitude;
-    }
+	/**
+	 * Obtiene la latitud del evento.
+	 * 
+	 * @return La latitud del evento.
+	 */
+	public Float getLatitude() {
+		return latitude;
+	}
 
-    /**
-     * Obtiene el ID del evento.
-     * 
-     * @return El ID del evento.
-     */
-    public Long getId() {
-        return id;
-    }
+	/**
+	 * Establece la latitud del evento.
+	 * 
+	 * @param latitude La nueva latitud del evento.
+	 */
+	public void setLatitude(Float latitude) {
+		this.latitude = latitude;
+	}
 
-    /**
-     * Establece el ID del evento.
-     * 
-     * @param id El nuevo ID del evento.
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+	/**
+	 * Obtiene la longitud del evento.
+	 * 
+	 * @return La longitud del evento.
+	 */
+	public Float getLongitude() {
+		return longitude;
+	}
 
-    /**
-     * Obtiene el nombre del municipio asociado al evento.
-     *
-     * @return El nombre del municipio asociado al evento.
-     */
-    public String getTown() {
-        return town;
-    }
+	/**
+	 * Establece la longitud del evento.
+	 * 
+	 * @param longitude La nueva longitud del evento.
+	 */
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
+	}
 
-    /**
-     * Establece el nombre del municipio asociado al evento.
-     *
-     * @param town El nuevo nombre del municipio asociado al evento.
-     */
-    public void setTown(String town) {
-        this.town = town;
-    }
+	/**
+	 * Obtiene el ID del evento.
+	 * 
+	 * @return El ID del evento.
+	 */
+	public Long getId() {
+		return id;
+	}
 
-    /**
-     * Obtiene el nombre de la ciudad asociada al evento.
-     *
-     * @return El nombre de la ciudad asociada al evento.
-     */
-    public String getCity() {
-        return city;
-    }
+	/**
+	 * Establece el ID del evento.
+	 * 
+	 * @param id El nuevo ID del evento.
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    /**
-     * Establece el nombre de la ciudad asociada al evento.
-     *
-     * @param city El nuevo nombre de la ciudad asociada al evento.
-     */
-    public void setCity(String city) {
-        this.city = city;
-    }
+	/**
+	 * Obtiene el nombre del municipio asociado al evento.
+	 *
+	 * @return El nombre del municipio asociado al evento.
+	 */
+	public String getTown() {
+		return town;
+	}
+
+	/**
+	 * Establece el nombre del municipio asociado al evento.
+	 *
+	 * @param town El nuevo nombre del municipio asociado al evento.
+	 */
+	public void setTown(String town) {
+		this.town = town;
+	}
+
+	/**
+	 * Obtiene el nombre de la ciudad asociada al evento.
+	 *
+	 * @return El nombre de la ciudad asociada al evento.
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * Establece el nombre de la ciudad asociada al evento.
+	 *
+	 * @param city El nuevo nombre de la ciudad asociada al evento.
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
 }

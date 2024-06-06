@@ -14,6 +14,10 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+/**
+ * Servicio para el envío de correos electrónicos. Utiliza el protocolo SMTP
+ * para enviar correos electrónicos de confirmación.
+ */
 @Service
 public class EmailService {
 

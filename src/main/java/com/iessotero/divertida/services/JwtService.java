@@ -23,62 +23,58 @@ import java.util.Map;
 @Service
 public class JwtService {
 
-    @Value("${security.jwt.expiration-minutes}")
-    private long EXPIRATION_MINUTES;
+	@Value("${security.jwt.expiration-minutes}")
+	private long EXPIRATION_MINUTES;
 
-    @Value("${security.jwt.secret-key}")
-    private String SECRET_KEY;
+	@Value("${security.jwt.secret-key}")
+	private String SECRET_KEY;
 
-    /**
-     * Genera un token JWT para un usuario con reclamos adicionales.
-     *
-     * @param user        el usuario para el cual se genera el token.
-     * @param extraClaims reclamos adicionales a incluir en el token.
-     * @return el token JWT generado.
-     */
-    public String generateToken(User user, Map<String, Object> extraClaims) {
-        Date issuedAt = new Date(System.currentTimeMillis());
-        Date expiration = new Date(issuedAt.getTime() + (EXPIRATION_MINUTES * 60 * 1000));
+	/**
+	 * Genera un token JWT para un usuario con reclamos adicionales.
+	 *
+	 * @param user        el usuario para el cual se genera el token.
+	 * @param extraClaims reclamos adicionales a incluir en el token.
+	 * @return el token JWT generado.
+	 */
+	public String generateToken(User user, Map<String, Object> extraClaims) {
+		Date issuedAt = new Date(System.currentTimeMillis());
+		Date expiration = new Date(issuedAt.getTime() + (EXPIRATION_MINUTES * 60 * 1000));
 
-        return Jwts.builder()
-                .setClaims(extraClaims)
-                .setSubject(user.getEmail())
-                .setIssuedAt(issuedAt)
-                .setExpiration(expiration)
-                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .signWith(generateKey(), SignatureAlgorithm.HS256)
-                .compact();
-    }
+		return Jwts.builder().setClaims(extraClaims).setSubject(user.getEmail()).setIssuedAt(issuedAt)
+				.setExpiration(expiration).setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+				.signWith(generateKey(), SignatureAlgorithm.HS256).compact();
+	}
 
-    /**
-     * Extrae el nombre de usuario (email) del token JWT.
-     *
-     * @param jwt el token JWT del que se extraerá el nombre de usuario.
-     * @return el nombre de usuario extraído del token.
-     */
-    public String extractUsername(String jwt) {
-        return extractAllClaims(jwt).getSubject();
-    }
+	/**
+	 * Extrae el nombre de usuario (email) del token JWT.
+	 *
+	 * @param jwt el token JWT del que se extraerá el nombre de usuario.
+	 * @return el nombre de usuario extraído del token.
+	 */
+	public String extractUsername(String jwt) {
+		return extractAllClaims(jwt).getSubject();
+	}
 
-    /**
-     * Genera una clave criptográfica utilizando una clave secreta predefinida.
-     * La clave secreta se decodifica a partir de una cadena codificada en Base64.
-     *
-     * @return Un objeto {@link Key} que se puede usar para firmar con HMAC-SHA.
-     */
-    private Key generateKey() {
-        byte[] secretAsBytes = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(secretAsBytes);
-    }
+	/**
+	 * Genera una clave criptográfica utilizando una clave secreta predefinida. La
+	 * clave secreta se decodifica a partir de una cadena codificada en Base64.
+	 *
+	 * @return Un objeto {@link Key} que se puede usar para firmar con HMAC-SHA.
+	 */
+	private Key generateKey() {
+		byte[] secretAsBytes = Decoders.BASE64.decode(SECRET_KEY);
+		return Keys.hmacShaKeyFor(secretAsBytes);
+	}
 
-    /**
-     * Extrae todas las reclamaciones de un JWT (JSON Web Token) dado.
-     * El JWT se analiza utilizando una clave generada por el método {@link #generateKey()}.
-     *
-     * @param jwt El JSON Web Token del cual se extraerán las reclamaciones.
-     * @return Un objeto {@link Claims} que contiene las reclamaciones extraídas del JWT.
-     */
-    private Claims extractAllClaims(String jwt) {
-        return Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody();
-    }
+	/**
+	 * Extrae todas las reclamaciones de un JWT (JSON Web Token) dado. El JWT se
+	 * analiza utilizando una clave generada por el método {@link #generateKey()}.
+	 *
+	 * @param jwt El JSON Web Token del cual se extraerán las reclamaciones.
+	 * @return Un objeto {@link Claims} que contiene las reclamaciones extraídas del
+	 *         JWT.
+	 */
+	private Claims extractAllClaims(String jwt) {
+		return Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody();
+	}
 }

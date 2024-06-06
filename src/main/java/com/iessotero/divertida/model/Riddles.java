@@ -9,7 +9,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-
 /**
  * Esta clase representa una adivinanza.
  */
@@ -26,7 +25,7 @@ public class Riddles {
 
 	@Column(length = 255)
 	private String title;
-	
+
 	@Column(length = 255)
 	private String solution;
 
@@ -129,6 +128,5 @@ public class Riddles {
 	public void setSolution(String solution) {
 		this.solution = solution;
 	}
-	
-	
+
 }

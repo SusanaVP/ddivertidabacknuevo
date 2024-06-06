@@ -16,56 +16,55 @@ import com.iessotero.divertida.repository.IStoryRepository;
 @Service
 public class StoryService {
 
-    @Autowired
-    private IStoryRepository storyRepository;
+	@Autowired
+	private IStoryRepository storyRepository;
 
-    /**
-     * Obtiene la lista de todos los cuentos.
-     *
-     * @return una lista de objetos {@link Stories}.
-     */
-    public List<Stories> getAllStories() {
-        return storyRepository.findAll();
-    }
+	/**
+	 * Obtiene la lista de todos los cuentos.
+	 *
+	 * @return una lista de objetos {@link Stories}.
+	 */
+	public List<Stories> getAllStories() {
+		return storyRepository.findAll();
+	}
 
-    /**
-     * Obtiene la lista de cuentos por ID de categoría.
-     *
-     * @param categoryId el ID de la categoría.
-     * @return una lista de objetos {@link Stories}.
-     */
-    public List<Stories> getStoryById(Long categoryId) {
-        return storyRepository.findByCategoriesStoryId(categoryId);
-    }
+	/**
+	 * Obtiene la lista de cuentos por ID de categoría.
+	 *
+	 * @param categoryId el ID de la categoría.
+	 * @return una lista de objetos {@link Stories}.
+	 */
+	public List<Stories> getStoryById(Long categoryId) {
+		return storyRepository.findByCategoriesStoryId(categoryId);
+	}
 
-    /**
-     * Añade un nuevo cuento.
-     *
-     * @param story el objeto {@link Stories} que se va a añadir.
-     */
-    public void addStory(Stories story) {
-        storyRepository.save(story);	
-    }
+	/**
+	 * Añade un nuevo cuento.
+	 *
+	 * @param story el objeto {@link Stories} que se va a añadir.
+	 */
+	public void addStory(Stories story) {
+		storyRepository.save(story);
+	}
 
-    /**
-     * Elimina un cuento dado su ID.
-     *
-     * @param idStory el ID del cuento a eliminar.
-     */
-    public void deleteStory(Long idStory) {
-        storyRepository.deleteById(idStory);
-    }
-    
-    /**
-     * Obtiene todas las categorías de cuentos.
-     *
-     * @return una lista de objetos {@link CategoriesStory}.
-     */
-    public List<CategoriesStory> getStoryCategories() {
-        return storyRepository.findAllCategoriesStories();
-    }
-    
-	
+	/**
+	 * Elimina un cuento dado su ID.
+	 *
+	 * @param idStory el ID del cuento a eliminar.
+	 */
+	public void deleteStory(Long idStory) {
+		storyRepository.deleteById(idStory);
+	}
+
+	/**
+	 * Obtiene todas las categorías de cuentos.
+	 *
+	 * @return una lista de objetos {@link CategoriesStory}.
+	 */
+	public List<CategoriesStory> getStoryCategories() {
+		return storyRepository.findAllCategoriesStories();
+	}
+
 	/**
 	 * Modifica un cuento.
 	 *
